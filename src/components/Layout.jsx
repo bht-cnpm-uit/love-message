@@ -4,10 +4,11 @@ import Background from '../../src/Assets/header.png';
 import { FaEllipsisV } from "react-icons/fa";
 import TagMessage from './TagMessage';
 import AddMessage from "./AddMessage";
+import AddMessageTest from "./AddMessageTest";
 import Footer from "./Footer";
 import BoxCreateMessage from "./BoxCreateMessage";
 import ButtonCreateMessage from "./ButtonCreateMessage";
-
+import { app, db, auth } from "../config/firebase";
 const Layout = () => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
     const [scrollY, setScrollY] = useState(0)
@@ -38,13 +39,13 @@ const Layout = () => {
                     <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
                         <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
                         <div className="relative z-10">
-                            <AddMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
+                            <AddMessageTest isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
                         </div>
                     </div>
                 )
             }
             {
-                scrollY > 450 &&
+                scrollY > 500 &&
                 <ButtonCreateMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
             }
             <div className="max-w-[1000px] px-4 mx-auto mt-4">
