@@ -1,15 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Background from '../../src/Assets/header.png';
 import { FaEllipsisV } from "react-icons/fa";
 import TagMessage from './TagMessage';
 import AddMessage from "./AddMessage";
 import Footer from "./Footer";
+import BoxCreateMessage from "./BoxCreateMessage";
 import ButtonCreateMessage from "./ButtonCreateMessage";
 
 const Layout = () => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
-
+    const [scrollY, setScrollY] = useState(0)
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY)
+        }
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
     return (
         <>
             <header
@@ -21,15 +31,22 @@ const Layout = () => {
                 }}
             >
             </header>
-            <ButtonCreateMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
-            {isOpenCreateMessage && (
-                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-                    <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                    <div className="relative z-10">
-                        <AddMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
+            <BoxCreateMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
+            {
+                isOpenCreateMessage &&
+                (
+                    <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
+                        <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
+                        <div className="relative z-10">
+                            <AddMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
+            {
+                scrollY > 450 &&
+                <ButtonCreateMessage isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage} />
+            }
             <ResponsiveMasonry
                 columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
             >
