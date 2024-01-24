@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 import { collection, addDoc } from 'firebase/firestore';
 import { app, auth, db } from '../config/firebase';
+import { Fa500Px } from 'react-icons/fa';
 
-const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
+const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage, getData }) => {
     const [data, setData] = useState({
         nickname: "",
         password: "",
@@ -42,14 +43,15 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                 },
                 updatedTime: Date()
             });
-        setIsOpenCreateMessage(false)
+        setIsOpenCreateMessage(false);
+        getData();
         } catch (e) {
             console.log(e.message)
         }
     };
 
     const handleCancel = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage);
+        setIsOpenCreateMessage(false);
         // Xử lý logic khi nhấn nút Hủy
         console.log('Bạn đã hủy bỏ việc cập nhật');
     };
