@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { app, auth, db } from '../config/firebase';
 import { Fa500Px } from 'react-icons/fa';
 
@@ -41,7 +41,8 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage, getData }
                     haha: 0,
                     sad: 0
                 },
-                updatedTime: Date()
+                createdTime: serverTimestamp(),
+                updatedTime: serverTimestamp()
             });
         setIsOpenCreateMessage(false);
         getData();

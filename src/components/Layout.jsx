@@ -52,7 +52,7 @@ const Layout = () => {
                 (
                     <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
                         <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                        <div className="relative z-10">
+                        <div className="relative z-10 w-1/2">
                             <AddMessageTest isOpenCreateMessage={isOpenCreateMessage} setIsOpenCreateMessage={setIsOpenCreateMessage}  getData = {getData} />
                         </div>
                     </div>
