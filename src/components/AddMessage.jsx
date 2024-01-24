@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
-
 const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     const [displayName, setDisplayName] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
     const handleUpdate = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage)
+        setIsOpenCreateMessage(!isOpenCreateMessage);
         // Xử lý logic khi nhấn nút Cập nhật
         console.log('Thông tin đã được cập nhật:', {
             displayName,
@@ -19,7 +18,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     };
 
     const handleCancel = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage)
+        setIsOpenCreateMessage(!isOpenCreateMessage);
         // Xử lý logic khi nhấn nút Hủy
         console.log('Bạn đã hủy bỏ việc cập nhật');
     };
