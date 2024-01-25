@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
-const ColorPicker = () => {
+const ColorPicker = ({data, setData}) => {
     const [selectedColor, setSelectedColor] = useState(null);
 
     const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00'];
 
     const handleColorClick = (color) => {
         setSelectedColor(color);
+        setData({...data, color: color})
     };
 
     return (

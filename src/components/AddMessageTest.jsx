@@ -1,24 +1,58 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { app, auth, db } from '../config/firebase';
+import { Fa500Px } from 'react-icons/fa';
 
-const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
-    const [displayName, setDisplayName] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage, getData }) => {
+    const [data, setData] = useState({
+        nickname: "",
+        password: "",
+        message: "",
+        color: "",
+        reacts: {
+            heart: 0,
+            haha: 0,
+            sad: 0
+        },
+        updatedTime: Date()
+    });
 
     const handleUpdate = () => {
         setIsOpenCreateMessage(!isOpenCreateMessage);
         // Xử lý logic khi nhấn nút Cập nhật
         console.log('Thông tin đã được cập nhật:', {
-            displayName,
-            password,
-            message,
-            selectedColor,
+            displayName: data.nickname,
+            password: data.password,
+            message: data.message,
+            selectedColor: data.color,
         });
     };
 
+    const handleCreateMessage = async () => {
+        try {
+            const docRef = await addDoc(collection(db, "messages"), {
+                nickname: data.nickname,
+                password: data.password,
+                message: data.message,
+                color: data.color,
+                reacts: {
+                    heart: 0,
+                    haha: 0,
+                    sad: 0
+                },
+                createdTime: serverTimestamp(),
+                updatedTime: serverTimestamp()
+            });
+        setIsOpenCreateMessage(false);
+        getData();
+        } catch (e) {
+            console.log(e.message)
+        }
+    };
+
     const handleCancel = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage);
+        setIsOpenCreateMessage(false);
         // Xử lý logic khi nhấn nút Hủy
         console.log('Bạn đã hủy bỏ việc cập nhật');
     };
@@ -33,11 +67,10 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                             id="displayName"
                             type="text"
                             placeholder="Tên hiển thị"
-                            value={displayName}
-                            onChange={(e) => setDisplayName(e.target.value)}
+                            value={data.nickname}
+                            onChange={(e) => setData({ ...data, nickname: e.target.value })}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
-                        {/* Đường kẻ dưới input khi được focus */}
                     </div>
                 </div>
 
@@ -48,11 +81,10 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                             id="password"
                             type="password"
                             placeholder="Mật khẩu"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={data.password}
+                            onChange={(e) => setData({ ...data, password: e.target.value })}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
-                        {/* Đường kẻ dưới input khi được focus */}
                     </div>
                 </div>
 
@@ -62,23 +94,24 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                             className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
                             id="message"
                             placeholder="Lời nhắn"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            value={data.message}
+                            onChange={(e) => setData({ ...data, message: e.target.value })}
                             style={{ fontFamily: 'Dancing Script' }}
                         ></textarea>
-                        {/* Đường kẻ dưới input khi được focus */}
                     </div>
                 </div>
-                <ColorPicker />
+
+                <ColorPicker data = {data} setData = {setData}/>
                 <br />
+
                 <div className="flex items-center justify-end">
                     <button
                         className="bg-[#E4BE4A] hover:bg-[#D4AE3E] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
                         type="button"
-                        onClick={handleUpdate}
+                        onClick={handleCreateMessage}
                         style={{ fontFamily: 'Dancing Script' }}
                     >
-                        Lưu
+                        Gửi lời nhắn
                     </button>
                     <button
                         className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -94,4 +127,4 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     );
 };
 
-export default AddMessage;
+export default AddMessageTest;
