@@ -1,9 +1,13 @@
-//import TagMessage from "./components/TagMessage";
-import AddMessage from "./components/AddMessage";
+import TagMessage from './components/TagMessage';
+import AddMessage from './components/AddMessage';
+import UpdateMessage from './components/UpdateMessage';
 
 export default function App() {
-    return ( 
-        //<TagMessage />
-        <AddMessage />
-    )
+    return (
+        <div>
+            <TagMessage />
+            <AddMessage />
+            <UpdateMessage />
+        </div>
+    );
 }

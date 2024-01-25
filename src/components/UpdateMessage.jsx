@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
 
-const AddMessage = () => {
+const UpdateMessage = () => {
     const [displayName, setDisplayName] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -77,7 +77,7 @@ const AddMessage = () => {
                         onClick={handleUpdate}
                         style={{ fontFamily: 'Dancing Script' }}
                     >
-                        Lưu
+                        Cập nhật
                     </button>
                     <button
                         className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -93,4 +93,4 @@ const AddMessage = () => {
     );
 };
 
-export default AddMessage;
+export default UpdateMessage;
