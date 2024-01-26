@@ -34,6 +34,7 @@ const Layout = () => {
 
     useEffect(() => {
         getData();
+        console.log("get data: ", messages)
     }, []);
     return (
         <>
@@ -67,8 +68,8 @@ const Layout = () => {
                 >
                     <Masonry gutter="16px">
                         {
-                            messages.map((element) => (
-                            <TagMessage data={element} />
+                            messages.map((element, index) => (
+                            <TagMessage key = {index} data={element} />
                             ))
                         }
                     </Masonry>
