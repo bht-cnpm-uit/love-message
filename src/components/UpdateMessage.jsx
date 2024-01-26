@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
-const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
+
+const UpdateMessage = () => {
     const [displayName, setDisplayName] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
 
     const handleUpdate = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage);
         // Xử lý logic khi nhấn nút Cập nhật
         console.log('Thông tin đã được cập nhật:', {
             displayName,
@@ -18,7 +18,6 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     };
 
     const handleCancel = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage);
         // Xử lý logic khi nhấn nút Hủy
         console.log('Bạn đã hủy bỏ việc cập nhật');
     };
@@ -78,7 +77,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                         onClick={handleUpdate}
                         style={{ fontFamily: 'Dancing Script' }}
                     >
-                        Lưu
+                        Cập nhật
                     </button>
                     <button
                         className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -94,4 +93,4 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     );
 };
 
-export default AddMessage;
+export default UpdateMessage;
