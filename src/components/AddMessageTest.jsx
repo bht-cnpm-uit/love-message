@@ -9,7 +9,7 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage, getData }
         nickname: "",
         password: "",
         message: "",
-        color: "",
+        color: "#ff0000",
         reacts: {
             heart: 0,
             haha: 0,

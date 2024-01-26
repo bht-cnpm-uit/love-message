@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 
-const data = [
-    {
-        nickName: '',
-        updateTime: '',
-        content: '',
-        color: '',
-    },
-];
+// const data = [
+//     {
+//         nickName: '',
+//         updateTime: '',
+//         content: '',
+//         color: '',
+//     },
+// ];
 
-
-const TagMessage = (message) => {
-
+const mapColor = {
+    '#ff0000': ["bg-red-100/75", "border-red-300"], 
+    '#00ff00': ["bg-green-100/75", "border-green-300"],
+    '#0000ff': ["bg-blue-100/75", "border-blue-300"],
+    '#ffff00': ["bg-yellow-100/75", "border-yellow-300"]
+};
+const TagMessage = (data) => {
     const [option, setOption] = useState(false);
     const handleOption = () => {
         setOption(!option);
@@ -20,9 +24,9 @@ const TagMessage = (message) => {
 
     return (
         <div className="tagMessage">
-            <div className=" relative w-[25%] justify-center items-center m-8 p-4 bg-amber-100/75 text-black rounded-[25px] border-4 border-amber-300">
+            <div className={`relative w-[25%] justify-center items-center m-8 p-4 ${mapColor[data.data.color][0]} text-black rounded-[25px] border-4 ${mapColor[data.data.color][1]}`}>
                 <span className="text-xs inline ">
-                    {message.nickName} {message.updateTime}
+                    {data.data.nickName} {data.data.updateTime}
                 </span>
 
                 <FaEllipsisV  onClick={handleOption} className='float-right inline text-xs' />
@@ -38,7 +42,7 @@ const TagMessage = (message) => {
                     )
                 }
 
-                <p className="block mt-4 mb-10 font-semibold">{message.content}</p>
+                <p className="block mt-4 mb-10 font-semibold">{data.data.message}</p>
                 <div className="absolute bottom-4 right-8 ">
                     <svg
                         className="inline mr-4"
