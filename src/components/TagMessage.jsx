@@ -50,9 +50,10 @@ const TagMessage = (data) => {
                 )}
                 
                 <p className="block mt-4 mb-10 font-semibold">{data.data.message}</p>
-                <div className="absolute bottom-4 right-8 ">
+                <div className="absolute bottom-0 right-8 ">
+                    
                     <svg
-                        className="inline mr-4"
+                        className="inline mr-4 hover:scale-110 ease-in duration-200"
                         width="30"
                         height="30"
                         viewBox="0 0 41 41"
@@ -71,10 +72,11 @@ const TagMessage = (data) => {
                             d="M18.671 3.6793C17.7077 0.953223 14.7193 -0.477659 11.9921 0.483365C10.3369 1.06648 9.16506 2.40205 8.70866 3.96413C7.37309 3.03451 5.62374 2.73061 3.97082 3.31373C1.24587 4.27588 -0.187259 7.2666 0.776007 9.99268C0.912816 10.3784 1.09448 10.7362 1.3053 11.067C3.49311 15.0838 9.81434 17.9074 13.6416 17.9422C16.5987 15.5121 19.7487 9.34676 18.9323 4.84778C18.8897 4.45754 18.8056 4.06506 18.671 3.6793ZM21.6987 3.6793C22.662 0.953223 25.6516 -0.477659 28.3777 0.483365C30.0329 1.06648 31.2047 2.40205 31.6622 3.96413C32.9978 3.03451 34.7471 2.73061 36.4001 3.31373C39.125 4.27588 40.557 7.2666 39.596 9.99268C39.4581 10.3784 39.2775 10.7362 39.0656 11.067C36.8778 15.0838 30.5565 17.9074 26.7281 17.9422C23.7711 15.5121 20.6222 9.34676 21.4386 4.84778C21.4801 4.45754 21.5642 4.06506 21.6987 3.6793Z"
                             fill="#DD2E44"
                         />
-                    </svg>
 
+                    </svg>
+                    
                     <svg
-                        className="inline"
+                        className="inline hover:scale-110 ease-in duration-200"
                         width="30"
                         height="30"
                         viewBox="0 0 40 39"
@@ -106,6 +108,12 @@ const TagMessage = (data) => {
                             fill="#E75A70"
                         />
                     </svg>
+                    <div>
+                        <span className='ml-2 '>{data.data.reacts.heart}</span>
+                        <span className='ml-10 '>{data.data.reacts.sad}</span>
+                    </div>
+                   
+
                 </div>
             </div>
         </div>
