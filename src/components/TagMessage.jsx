@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
+import moment from 'moment';
 
 // const data = [
 //     {
@@ -11,37 +12,43 @@ import { FaEllipsisV } from 'react-icons/fa';
 // ];
 
 const mapColor = {
-    '#ff0000': ["bg-red-100/75", "border-red-300"], 
-    '#00ff00': ["bg-green-100/75", "border-green-300"],
-    '#0000ff': ["bg-blue-100/75", "border-blue-300"],
-    '#ffff00': ["bg-yellow-100/75", "border-yellow-300"]
+    '#ff0000': ['bg-red-100/75', 'border-red-300'],
+    '#00ff00': ['bg-green-100/75', 'border-green-300'],
+    '#0000ff': ['bg-blue-100/75', 'border-blue-300'],
+    '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
 };
 const TagMessage = (data) => {
     const [option, setOption] = useState(false);
     const handleOption = () => {
         setOption(!option);
-    }
-
+    };
+    
     return (
-        <div className="tagMessage">
-            <div className={`relative w-[25%] justify-center items-center m-8 p-4 ${mapColor[data.data.color][0]} text-black rounded-[25px] border-4 ${mapColor[data.data.color][1]}`}>
-                <span className="text-xs inline ">
-                    {data.data.nickName} {data.data.updateTime}
+        <div className="tagMessage font-mono">
+            <div
+                className={`relative w-[85%] justify-center items-center m-8 p-4 ${
+                    mapColor[data.data.color][0]
+                } text-black rounded-[25px] border-4 ${mapColor[data.data.color][1]}`}
+            >
+                <span className="text-xs inline">
+                    <span className='mr-1'>{data.data.nickname}</span>
+                    <span>{moment(data.data.updatedTime, 'ddd MMM D YYYY HH:mm:ss ZZ').format()}</span>
                 </span>
 
-                <FaEllipsisV  onClick={handleOption} className='float-right inline text-xs' />
-                {
-                    option ? (
-                        <div className='text-base absolute -top-8 -right-6 rounded-lg bg-slate-100' >
-                            <button className='block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200'>Sửa</button>
-                            <button className='block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200'>Xóa</button>
-                        </div>
-                    )
-                    : (
-                        ''
-                    )
-                }
-
+                <FaEllipsisV onClick={handleOption} className="float-right inline text-xs" />
+                {option ? (
+                    <div className="text-base absolute -top-8 -right-6 rounded-lg bg-slate-100">
+                        <button className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200">
+                            Sửa
+                        </button>
+                        <button className="block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200">
+                            Xóa
+                        </button>
+                    </div>
+                ) : (
+                    ''
+                )}
+                
                 <p className="block mt-4 mb-10 font-semibold">{data.data.message}</p>
                 <div className="absolute bottom-4 right-8 ">
                     <svg
