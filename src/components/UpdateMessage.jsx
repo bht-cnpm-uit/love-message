@@ -1,25 +1,44 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
+import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
-
-const UpdateMessage = () => {
-    const [displayName, setDisplayName] = useState('');
+const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }) => {
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const [newMessage, setNewMessage] = useState('');
 
-    const handleUpdate = () => {
-        // Xử lý logic khi nhấn nút Cập nhật
-        console.log('Thông tin đã được cập nhật:', {
-            displayName,
-            password,
-            message,
-            selectedColor,
-        });
+    const handleUpdate = async () => {
+        if (data.data.password !== password) {
+            console.log('Sai mật khẩu: ' + password + '; id: ' + data.data.id);
+            return;
+        }
+        if (data.data.message === newMessage) return;
+
+        try {
+            // Tạo reference đến document muốn cập nhật
+            const docRef = doc(db, 'messages', data.data.id);
+            // Lấy dữ liệu hiện tại của document
+            const docSnapshot = await getDoc(docRef);
+            console.log(docSnapshot);
+            if (docSnapshot.exists()) {
+                // Cập nhật dữ liệu trong document với dữ liệu mới
+                const updateData = {
+                    message: newMessage,
+                    updatedTime: serverTimestamp(),
+                };
+                await updateDoc(docRef, updateData, { merge: true });
+                console.log('Document updated successfully!');
+            } else {
+                console.log('Document does not exist!');
+            }
+            setIsOpenUpdateMessage(false);
+        } catch (error) {
+            console.error('Error updating document:', error);
+        }
     };
 
     const handleCancel = () => {
-        // Xử lý logic khi nhấn nút Hủy
-        console.log('Bạn đã hủy bỏ việc cập nhật');
+        setIsOpenUpdateMessage(false);
     };
 
     return (
@@ -29,26 +48,12 @@ const UpdateMessage = () => {
                     <div className="relative">
                         <input
                             className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
-                            id="displayName"
-                            type="text"
-                            placeholder="Tên hiển thị"
-                            value={displayName}
-                            onChange={(e) => setDisplayName(e.target.value)}
-                            style={{ fontFamily: 'Dancing Script' }}
-                        />
-                        {/* Đường kẻ dưới input khi được focus */}
-                    </div>
-                </div>
-
-                <div className="mb-4">
-                    <div className="relative">
-                        <input
-                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
                             id="password"
                             type="password"
                             placeholder="Mật khẩu"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
                         {/* Đường kẻ dưới input khi được focus */}
@@ -60,9 +65,10 @@ const UpdateMessage = () => {
                         <textarea
                             className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
                             id="message"
-                            placeholder="Lời nhắn"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            placeholder={data.data.message}
+                            onChange={(e) => {
+                                setNewMessage(e.target.value);
+                            }}
                             style={{ fontFamily: 'Dancing Script' }}
                         ></textarea>
                         {/* Đường kẻ dưới input khi được focus */}
