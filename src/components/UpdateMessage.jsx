@@ -6,7 +6,18 @@ import { db } from '../config/firebase';
 const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }) => {
     const [password, setPassword] = useState('');
     const [newMessage, setNewMessage] = useState(data.data.message);
-    const [newColor, setNewColor] = useState(data.data.color);
+    const [tempDataForChangeColor, setTempDataForChangeColor] = useState({
+        nickname: '',
+        password: '',
+        message: '',
+        color: data.data.color,
+        reacts: {
+            heart: 0,
+            haha: 0,
+            sad: 0,
+        },
+        updatedTime: '',
+    });
 
     const handleUpdate = async () => {
         if (data.data.password !== password) {
@@ -26,6 +37,7 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
                 const updateData = {
                     message: newMessage,
                     updatedTime: serverTimestamp(),
+                    color: tempDataForChangeColor.color
                 };
                 await updateDoc(docRef, updateData, { merge: true });
                 console.log('Document updated successfully!');
@@ -75,7 +87,7 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
                         {/* Đường kẻ dưới input khi được focus */}
                     </div>
                 </div>
-                <ColorPicker />
+                <ColorPicker data={tempDataForChangeColor} setData={setTempDataForChangeColor}/>
                 <br />
                 <div className="flex items-center justify-end">
                     <button
