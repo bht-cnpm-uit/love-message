@@ -89,8 +89,8 @@ const TagMessage = (data, id) => {
                 } text-black rounded-[25px] border-4 ${mapColor[data.data.color][1]}`}
             >
                 <span className="text-xs inline">
-                    <span className="mr-1">{data.data.nickname}</span>
-                    <span>
+                    <span className="mr-2 font-semibold">{data.data.nickname}</span>
+                    <span >
                         {moment.unix(data.data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
                     </span>
                 </span>
@@ -118,7 +118,7 @@ const TagMessage = (data, id) => {
                     ''
                 )}
 
-                <p className="block mt-4 mb-10 font-semibold">{data.data.message}</p>
+                <p className="block mt-4 mb-14 font-bold">{data.data.message}</p>
                 <div className="absolute bottom-0 right-8 ">
                     <svg
                         className="inline mr-4 hover:scale-110 ease-in duration-200"
