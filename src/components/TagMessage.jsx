@@ -20,7 +20,6 @@ const mapColor = {
 };
 
 const TagMessage = (data, id) => {
-    console.log(data.data.updatedTime)
     const [option, setOption] = useState(false);
     const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
 
@@ -76,7 +75,7 @@ const TagMessage = (data, id) => {
                     <span>
                         {
                             // moment(data.data.updatedTime, 'ddd MMM D YYYY').format()
-                            moment.unix(data.data.updatedTime.seconds).format("HH:mm DD/MM/YYYY")
+                            moment.unix(data.data.createdTime?.seconds).format("HH:mm DD/MM/YYYY")
                         }
                     </span>
                 </span>

@@ -15,7 +15,7 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
             haha: 0,
             sad: 0
         },
-        updatedTime: Date()
+        updatedTime: serverTimestamp()
     });
 
     const handleUpdate = () => {
