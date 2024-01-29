@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import moment from 'moment';
 import UpdateMessage from './UpdateMessage';
+import DeleteMessage from './DeleteMessage';
 
 // const data = [
 //     {
@@ -22,6 +23,7 @@ const mapColor = {
 const TagMessage = (data, id) => {
     const [option, setOption] = useState(false);
     const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
+    const [isOpenDeleteMessage, setIsOpenDeleteMessage] = useState(false);
 
     const ref = useRef(null);
     useOutside(ref);
@@ -32,6 +34,9 @@ const TagMessage = (data, id) => {
 
     const handleClickOpenUpdateMessage = () => {
         setIsOpenUpdateMessage(true);
+    };
+    const handleClickOpenDeleteMessage = () => {
+        setIsOpenDeleteMessage(true);
     };
 
     function useOutside(ref) {
@@ -65,6 +70,19 @@ const TagMessage = (data, id) => {
                     </div>
                 </div>
             )}
+
+            {isOpenDeleteMessage && (
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
+                    <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
+                    <div className="relative z-10 w-1/2">
+                        <DeleteMessage
+                            isOpenUpdateMessage={isOpenDeleteMessage}
+                            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                            data={data}
+                        />
+                    </div>
+                </div>
+            )}
             <div
                 className={`relative justify-center items-center p-4 ${
                     mapColor[data.data.color][0]
@@ -73,9 +91,7 @@ const TagMessage = (data, id) => {
                 <span className="text-xs inline">
                     <span className="mr-1">{data.data.nickname}</span>
                     <span>
-                        {
-                            moment.unix(data.data.createdTime?.seconds).format("HH:mm DD/MM/YYYY")
-                        }
+                        {moment.unix(data.data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
                     </span>
                 </span>
 
@@ -91,7 +107,10 @@ const TagMessage = (data, id) => {
                         >
                             Sửa
                         </button>
-                        <button className="block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200">
+                        <button
+                            className="block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200"
+                            onClick={handleClickOpenDeleteMessage}
+                        >
                             Xóa
                         </button>
                     </div>
