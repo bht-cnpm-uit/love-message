@@ -4,7 +4,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { app, auth, db } from '../config/firebase';
 import { Fa500Px } from 'react-icons/fa';
 
-const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage, getData }) => {
+const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     const [data, setData] = useState({
         nickname: "",
         password: "",
@@ -45,7 +45,6 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage, getData }
                 updatedTime: serverTimestamp()
             });
         setIsOpenCreateMessage(false);
-        getData();
         } catch (e) {
             console.log(e.message)
         }
