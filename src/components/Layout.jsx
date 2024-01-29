@@ -8,6 +8,9 @@ import Footer from './Footer';
 import AddMessageTest from './AddMessageTest';
 import ButtonCreateMessage from './ButtonCreateMessage';
 import TagMessage from './TagMessage';
+import Snowfall from 'react-snowfall'
+import hoadao from "../Assets/hoa_dao.png"
+import hoamai from "../Assets/hoa_mai.png"
 const Layout = () => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
     const [scrollY, setScrollY] = useState(0);
@@ -40,8 +43,26 @@ const Layout = () => {
         };
     }, []);
 
+    const flower1 = document.createElement('img')
+    flower1.src = hoadao
+    const flower2 = document.createElement('img')
+    flower2.src = hoamai
+
+    const images = [flower1, flower2]
     return (
         <>
+        <Snowfall 
+            color="red"
+            snowflakeCount={40}
+            images={images}
+            radius={[10.0, 20.0]}
+            wind = {[-0.5, 2.0]}
+            style={{
+                position: 'fixed',
+                width: '100vw',
+              }}
+        />
+        <script type="text/javascript" src="http://webquangnam.com/jsShare/hoa-mai-roi.js"></script>
             <header
                 className="bg-cover"
                 style={{
