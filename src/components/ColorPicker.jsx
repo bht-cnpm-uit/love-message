@@ -8,6 +8,7 @@ const ColorPicker = ({data, setData}) => {
     const handleColorClick = (color) => {
         setSelectedColor(color);
         setData({...data, color: color})
+        console.log(data);
     };
 
     return (
