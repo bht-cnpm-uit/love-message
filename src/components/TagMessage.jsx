@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import moment from 'moment';
 import UpdateMessage from './UpdateMessage';
@@ -18,9 +18,13 @@ const mapColor = {
     '#0000ff': ['bg-blue-100/75', 'border-blue-300'],
     '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
 };
+
 const TagMessage = (data, id) => {
     const [option, setOption] = useState(false);
     const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
+
+    const ref = useRef(null);
+    useOutside(ref);
 
     const handleOption = () => {
         setOption(!option);
@@ -29,6 +33,23 @@ const TagMessage = (data, id) => {
     const handleClickOpenUpdateMessage = () => {
         setIsOpenUpdateMessage(true);
     };
+
+    function useOutside(ref) {
+        useEffect(() => {
+            function handleClickOutside(event) {
+                // console.log(event.target)
+                if (ref.current && !ref.current.contains(event.target)) {
+                    setOption(false);
+                }
+            }
+            // Bind the event listener
+            document.addEventListener('click', handleClickOutside, true);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener('click', handleClickOutside, true);
+            };
+        }, [ref]);
+    }
 
     return (
         <div className="tagMessage font-mono">
@@ -39,7 +60,7 @@ const TagMessage = (data, id) => {
                         <UpdateMessage
                             isOpenUpdateMessage={isOpenUpdateMessage}
                             setIsOpenUpdateMessage={setIsOpenUpdateMessage}
-                            data = {data}
+                            data={data}
                         />
                     </div>
                 </div>
@@ -58,7 +79,10 @@ const TagMessage = (data, id) => {
 
                 <FaEllipsisV onClick={handleOption} className="float-right inline text-xs" />
                 {option ? (
-                    <div className="text-base absolute -top-8 -right-6 rounded-lg bg-slate-100">
+                    <div
+                        ref={ref}
+                        className="text-base absolute -top-8 -right-6 rounded-lg bg-slate-100"
+                    >
                         <button
                             className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200"
                             onClick={handleClickOpenUpdateMessage}
