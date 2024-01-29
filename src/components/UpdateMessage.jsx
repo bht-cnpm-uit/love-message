@@ -6,6 +6,8 @@ import { db } from '../config/firebase';
 const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }) => {
     const [password, setPassword] = useState('');
     const [newMessage, setNewMessage] = useState(data.data.message);
+    //password status: initial, writing, error, empty
+    const [passwordStatus, setPasswordStatus] = useState('initial');
     const [tempDataForChangeColor, setTempDataForChangeColor] = useState({
         nickname: '',
         password: '',
@@ -22,9 +24,13 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
     const handleUpdate = async () => {
         if (data.data.password !== password) {
             console.log('Sai mật khẩu: ' + password + '; id: ' + data.data.id);
+            setPasswordStatus('error');
             return;
         }
-        if (data.data.message === newMessage) return;
+        if (data.data.message === newMessage && data.data.color === tempDataForChangeColor.color) {
+            console.log('Không thay đổi gì');
+            return;
+        }
 
         try {
             // Tạo reference đến document muốn cập nhật
@@ -64,13 +70,20 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
                             id="password"
                             type="password"
                             placeholder="Mật khẩu"
+                            value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value);
+                                setPasswordStatus('writing');
+                                if(e.target.value == '')
+                                    setPasswordStatus('empty');
+                                console.log(passwordStatus);
                             }}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
                         {/* Đường kẻ dưới input khi được focus */}
                     </div>
+                    {passwordStatus === 'error' && "Sai mat khau"}
+                    {passwordStatus === 'empty' && "Vui long nhap mat khau"}
                 </div>
 
                 <div className="mb-4">
