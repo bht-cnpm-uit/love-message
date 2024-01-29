@@ -5,7 +5,8 @@ import { db } from '../config/firebase';
 
 const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }) => {
     const [password, setPassword] = useState('');
-    const [newMessage, setNewMessage] = useState('');
+    const [newMessage, setNewMessage] = useState(data.data.message);
+    const [newColor, setNewColor] = useState(data.data.color);
 
     const handleUpdate = async () => {
         if (data.data.password !== password) {
@@ -65,7 +66,7 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
                         <textarea
                             className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
                             id="message"
-                            placeholder={data.data.message}
+                            value={newMessage}
                             onChange={(e) => {
                                 setNewMessage(e.target.value);
                             }}
