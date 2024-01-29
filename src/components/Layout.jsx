@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import Background from '../../src/Assets/header.png';
+import Background from '../../src/Assets/dungdua_header.gif';
 import { collection, onSnapshot } from 'firebase/firestore';
 import {db } from '../config/firebase';
 import BoxCreateMessage from './BoxCreateMessage';
@@ -43,13 +43,13 @@ const Layout = () => {
         };
     }, []);
 
-    const flower1 = document.createElement('img')
-    flower1.src = hoadao
-    const flower2 = document.createElement('img')
-    flower2.src = hoamai
-
-    const images = [flower1, flower2]
-
+    const images = useMemo(() => {
+        const flower1 = document.createElement('img');
+        flower1.src = hoadao;
+        const flower2 = document.createElement('img');
+        flower2.src = hoamai;
+        return [flower1, flower2];
+      }, [hoadao, hoamai]);
     return (
         <>
         <Snowfall 
