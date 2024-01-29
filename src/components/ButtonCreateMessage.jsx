@@ -31,13 +31,14 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
 
     }, [showTooltip]); 
     return (
-
         <div className="">
-            <img loading="lazy" src={owl_img} className="fixed object-cover w-14 bottom-20 z-[200] right-5 cursor-pointer" alt="bee support" 
+            <img
+                src={owl_img}
+                className="fixed object-cover w-14 bottom-20 z-[200] right-5 cursor-pointer transition-transform duration-300 hover:transform hover:-rotate-6 hover:origin-bottom"
+                alt="bee support"
                 onClick={handleOpenCreateMessage}
             />
-            {
-                showTooltip &&
+            {showTooltip && (
                 <div className="fixed z-[300] bg-pink-400 rounded-md pb-14 md:bottom-40 right-12 w-52 md:w-52 flex text-center">
                     <div className="absolute">
                         <span className="tooltip text-sm text-white text-right">
@@ -45,7 +46,7 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
                         </span>
                     </div>
                 </div>
-            }
+            )}
         </div>
 
     );
