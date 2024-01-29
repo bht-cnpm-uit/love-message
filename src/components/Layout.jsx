@@ -49,6 +49,7 @@ const Layout = () => {
     flower2.src = hoamai
 
     const images = [flower1, flower2]
+
     return (
         <>
         <Snowfall 

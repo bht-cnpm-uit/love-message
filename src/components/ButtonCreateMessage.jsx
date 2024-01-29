@@ -1,23 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddMessage from "./AddMessage";
+import owl_img from "../Assets/owl.png"
+import "./style.css"
 
 const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
+    const [showTooltip, setShowTooltip] = useState(true);
 
     const handleOpenCreateMessage = () => {
         setIsOpenCreateMessage(!isOpenCreateMessage);
     };
 
-    return (
-        <button
-            type="button"
-            className="fixed right-5 bottom-20 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500"
-            onClick={handleOpenCreateMessage}
+    useEffect(() => {
+        let intervalId;
 
-        >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-        </button>
+        const toggleTooltip = () => {
+            setShowTooltip(prevShowTooltip => !prevShowTooltip);
+        };
+
+        const setTimer = () => {
+            if (showTooltip) {
+                // If showTooltip is true, set a 10-second timer
+                intervalId = setInterval(toggleTooltip, 10000);
+            } else {
+                // If showTooltip is false, set a 60-second timer
+                intervalId = setInterval(toggleTooltip, 60000);
+            }
+        };
+        setTimer();
+        return () => clearInterval(intervalId); 
+
+    }, [showTooltip]); 
+    return (
+
+        <div className="">
+            <img loading="lazy" src={owl_img} className="fixed object-cover w-14 bottom-20 z-[200] right-5 cursor-pointer" alt="bee support" 
+                onClick={handleOpenCreateMessage}
+            />
+            {
+                showTooltip &&
+                <div className="fixed z-[300] bg-pink-400 rounded-md pb-14 md:bottom-40 right-12 w-52 md:w-52 flex text-center">
+                    <div className="absolute">
+                        <span className="tooltip text-sm text-white text-right">
+                            Hãy gửi những lời yêu thương cùng cú nào !!!
+                        </span>
+                    </div>
+                </div>
+            }
+        </div>
+
     );
 };
 

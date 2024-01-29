@@ -1,0 +1,9 @@
+.tooltip:after {
+    border: 10px solid transparent;
+    border-top-color: #f472b6;
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 56px;
+    transition: opacity .3s;
+}
