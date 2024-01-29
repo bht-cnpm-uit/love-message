@@ -66,7 +66,7 @@ const TagMessage = (data, id) => {
                 </div>
             )}
             <div
-                className={`relative w-[85%] justify-center items-center m-8 p-4 ${
+                className={`relative justify-center items-center p-4 ${
                     mapColor[data.data.color][0]
                 } text-black rounded-[25px] border-4 ${mapColor[data.data.color][1]}`}
             >
@@ -74,7 +74,6 @@ const TagMessage = (data, id) => {
                     <span className="mr-1">{data.data.nickname}</span>
                     <span>
                         {
-                            // moment(data.data.updatedTime, 'ddd MMM D YYYY').format()
                             moment.unix(data.data.createdTime?.seconds).format("HH:mm DD/MM/YYYY")
                         }
                     </span>

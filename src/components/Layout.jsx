@@ -13,7 +13,7 @@ import hoadao from "../Assets/hoa_dao.png"
 import hoamai from "../Assets/hoa_mai.png"
 const Layout = () => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
-    const [scrollY, setScrollY] = useState(0);
+    const [scrollY, setScrollY] = useState(false);
     const [messages, setMessages] = useState([]);
     const dbMessages = collection(db, 'messages');
 
@@ -35,7 +35,7 @@ const Layout = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrollY(window.scrollY);
+            setScrollY(window.scrollY > 500);
         };
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -63,7 +63,6 @@ const Layout = () => {
                 width: '100vw',
               }}
         />
-        <script type="text/javascript" src="http://webquangnam.com/jsShare/hoa-mai-roi.js"></script>
             <header
                 className="bg-cover"
                 style={{
@@ -86,22 +85,22 @@ const Layout = () => {
                     </div>
                 </div>
             )}
-            {scrollY > 500 && (
+            {scrollY && (
                 <ButtonCreateMessage
                     isOpenCreateMessage={isOpenCreateMessage}
                     setIsOpenCreateMessage={setIsOpenCreateMessage}
                 />
             )}
-            <div className="max-w-[1000px] px-4 mx-auto mt-4">
-                <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-                    <Masonry gutter="16px">
+            <div className="max-w-[1400px] px-4 mx-auto mt-14">
+                <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 , 1000:4}}>
+                    <Masonry gutter="32px">
                         {messages.map((element, index) => (
                             <TagMessage key={index} data={element}/>
                         ))}
                     </Masonry>
                 </ResponsiveMasonry>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };
