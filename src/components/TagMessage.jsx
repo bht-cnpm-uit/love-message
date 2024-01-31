@@ -3,15 +3,8 @@ import { FaEllipsisV } from 'react-icons/fa';
 import moment from 'moment';
 import UpdateMessage from './UpdateMessage';
 import DeleteMessage from './DeleteMessage';
-
-// const data = [
-//     {
-//         nickName: '',
-//         updateTime: '',
-//         content: '',
-//         color: '',
-//     },
-// ];
+import LinesEllipsis from 'react-lines-ellipsis';
+import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 
 const mapColor = {
     '#ff0000': ['bg-red-100/75', 'border-red-300'],
@@ -53,7 +46,7 @@ const TagMessage = (data, id) => {
                 // Unbind the event listener on clean up
                 document.removeEventListener('click', handleClickOutside, true);
             };
-        }, [ref]);
+        }, []);
     }
 
     return (
@@ -90,17 +83,14 @@ const TagMessage = (data, id) => {
             >
                 <span className="text-xs inline">
                     <span className="mr-2 font-semibold">{data.data.nickname}</span>
-                    <span >
+                    <span>
                         {moment.unix(data.data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
                     </span>
                 </span>
 
                 <FaEllipsisV onClick={handleOption} className="float-right inline text-xs" />
                 {option ? (
-                    <div
-                        ref={ref}
-                        className="text-base absolute -top-8 -right-6 rounded-lg bg-slate-100"
-                    >
+                    <div ref={ref} className="text-base absolute top-8 right-0 rounded-lg bg-white">
                         <button
                             className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200"
                             onClick={handleClickOpenUpdateMessage}
@@ -108,6 +98,7 @@ const TagMessage = (data, id) => {
                             Sửa
                         </button>
                         <button
+                            ref={ref}
                             className="block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200"
                             onClick={handleClickOpenDeleteMessage}
                         >
@@ -118,7 +109,14 @@ const TagMessage = (data, id) => {
                     ''
                 )}
 
-                <p className="block mt-4 mb-14 font-bold">{data.data.message}</p>
+                <LinesEllipsis
+                    text={data.data.message}
+                    className="block mt-4 mb-14 font-bold"
+                    maxLine={5}
+                    ellipsis="...Hiện thêm..."
+                    isClamped
+                />
+                {/* <p className="block mt-4 mb-14 font-bold">{data.data.message}</p> */}
                 <div className="absolute bottom-0 right-8 ">
                     <svg
                         className="inline mr-4 hover:scale-110 ease-in duration-200"
