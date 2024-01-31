@@ -57,7 +57,7 @@ const TagMessage = (data, id) => {
     }
 
     return (
-        <div className="tagMessage font-mono">
+        <div className="tagMessage font-mono align-bottom">
             {isOpenUpdateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
                     <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>

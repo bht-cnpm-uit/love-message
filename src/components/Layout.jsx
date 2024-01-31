@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import React, { useEffect, useState, useMemo, useRef  } from 'react';
+import StackGrid from "react-stack-grid";
 import Background from '../../src/Assets/dungdua_header.gif';
 import { collection, onSnapshot } from 'firebase/firestore';
 import {db } from '../config/firebase';
@@ -52,17 +52,17 @@ const Layout = () => {
       }, [hoadao, hoamai]);
     return (
         <>
-        <Snowfall 
-            color="red"
-            snowflakeCount={40}
-            images={images}
-            radius={[10.0, 20.0]}
-            wind = {[-0.5, 2.0]}
-            style={{
-                position: 'fixed',
-                width: '100vw',
-              }}
-        />
+            <Snowfall 
+                color="red"
+                snowflakeCount={40}
+                images={images}
+                radius={[10.0, 20.0]}
+                wind = {[-0.5, 2.0]}
+                style={{
+                    position: 'fixed',
+                    width: '100vw',
+                }}
+            />
             <header
                 className="bg-cover"
                 style={{
@@ -92,13 +92,17 @@ const Layout = () => {
                 />
             )}
             <div className="max-w-[1400px] px-4 mx-auto mt-14">
-                <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 , 1000:4}}>
-                    <Masonry gutter="32px">
+               
+                    <StackGrid
+                        gutterHeight={32}
+                        gutterWidth={32}
+                        columnWidth = {300}
+                        // horizontal = {true}
+                    >
                         {messages.map((element, index) => (
-                            <TagMessage key={index} data={element}/>
+                            <TagMessage  key={index} data={element}/>
                         ))}
-                    </Masonry>
-                </ResponsiveMasonry>
+                    </StackGrid>
             </div>
             {/* <Footer /> */}
         </>
