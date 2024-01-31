@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef  } from 'react';
+import React, { useEffect, useState, useMemo  } from 'react';
 import StackGrid from "react-stack-grid";
 import Background from '../../src/Assets/dungdua_header.gif';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -50,6 +50,7 @@ const Layout = () => {
         flower2.src = hoamai;
         return [flower1, flower2];
       }, [hoadao, hoamai]);
+    
     return (
         <>
             <Snowfall 
@@ -97,7 +98,6 @@ const Layout = () => {
                         gutterHeight={32}
                         gutterWidth={32}
                         columnWidth = {300}
-                        // horizontal = {true}
                     >
                         {messages.map((element, index) => (
                             <TagMessage  key={index} data={element}/>
