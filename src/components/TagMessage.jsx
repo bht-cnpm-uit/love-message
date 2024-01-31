@@ -10,7 +10,7 @@ const mapColor = {
     '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
 };
 
-const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag,isOpenCreateMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage}) => {
+const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag,isOpenDeleteMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage}) => {
     const [option, setOption] = useState(false);
 
     const ref = useRef(null);
@@ -22,9 +22,11 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
 
     const handleClickOpenUpdateMessage = () => {
         setIsOpenUpdateMessage(true);
+        setcurrentBigTag(data);
     };
     const handleClickOpenDeleteMessage = () => {
         setIsOpenDeleteMessage(true);
+        setcurrentBigTag(data);
     };
 
     function useOutside(ref) {
@@ -49,7 +51,7 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
         setcurrentBigTag(data);
     }
     return (
-        <div className={`${data.id === currentBigTag.id && (isShowBigTag || isOpenCreateMessage || isOpenUpdateMessage) ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer`}
+        <div className={`${data.id === currentBigTag.id && (isShowBigTag || isOpenDeleteMessage || isOpenUpdateMessage) ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer`}
             onClick={handleShowBigTag}
         >
             <div
