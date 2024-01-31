@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import Background from '../../src/Assets/dungdua_header.gif';
+import React, { useEffect, useState, useMemo  } from 'react';
+import StackGrid from "react-stack-grid";
+import Background from '../../src/Assets/header_center.png';
 import { collection, onSnapshot } from 'firebase/firestore';
 import {db } from '../config/firebase';
 import BoxCreateMessage from './BoxCreateMessage';
@@ -50,19 +50,20 @@ const Layout = () => {
         flower2.src = hoamai;
         return [flower1, flower2];
       }, [hoadao, hoamai]);
+    
     return (
-        <>
-        <Snowfall 
-            color="red"
-            snowflakeCount={40}
-            images={images}
-            radius={[10.0, 20.0]}
-            wind = {[-0.5, 2.0]}
-            style={{
-                position: 'fixed',
-                width: '100vw',
-              }}
-        />
+        <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-red-400 to-90%">
+            <Snowfall 
+                color="red"
+                snowflakeCount={40}
+                images={images}
+                radius={[10.0, 20.0]}
+                wind = {[-0.5, 2.0]}
+                style={{
+                    position: 'fixed',
+                    width: '100vw',
+                }}
+            />
             <header
                 className="bg-cover"
                 style={{
@@ -92,16 +93,19 @@ const Layout = () => {
                 />
             )}
             <div className="max-w-[1400px] px-4 mx-auto mt-14">
-                <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 , 1000:4}}>
-                    <Masonry gutter="32px">
+               
+                    <StackGrid
+                        gutterHeight={32}
+                        gutterWidth={32}
+                        columnWidth = {300}
+                    >
                         {messages.map((element, index) => (
-                            <TagMessage key={index} data={element}/>
+                            <TagMessage  key={index} data={element}/>
                         ))}
-                    </Masonry>
-                </ResponsiveMasonry>
+                    </StackGrid>
             </div>
             {/* <Footer /> */}
-        </>
+        </div>
     );
 };
 
