@@ -114,7 +114,9 @@ const Layout = () => {
                                 setIsShowBigTag= {setIsShowBigTag}
                                 currentBigTag = {currentBigTag}
                                 setcurrentBigTag = {setcurrentBigTag}
+                                isOpenCreateMessage = {isOpenCreateMessage}
                                 setIsOpenDeleteMessage = {setIsOpenDeleteMessage}
+                                setIsOpenUpdateMessage = {setIsOpenUpdateMessage}
                                 setIsOpenUpdateMessage = {setIsOpenUpdateMessage}
                             />
                         ))}

@@ -10,7 +10,7 @@ const mapColor = {
     '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
 };
 
-const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag, setIsOpenDeleteMessage, setIsOpenUpdateMessage}) => {
+const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag,isOpenCreateMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage}) => {
     const [option, setOption] = useState(false);
 
     const ref = useRef(null);
@@ -49,7 +49,7 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
         setcurrentBigTag(data);
     }
     return (
-        <div className={`${data.id === currentBigTag.id && isShowBigTag ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer`}
+        <div className={`${data.id === currentBigTag.id && (isShowBigTag || isOpenCreateMessage || isOpenUpdateMessage) ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer`}
             onClick={handleShowBigTag}
         >
             <div
