@@ -36,8 +36,11 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, id }
     };
 
     return (
-        <div className="max-w-md mx-auto my-8">
-            <form className="bg-white border-yellow-500 border-8 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4">
+        <div class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white border-4 border-yellow-300 rounded-lg shadow-md">
+            <div class="p-4 md:p-5">
+                <form className="space-y-4">
                 <div className="mb-4">
                     <div className="relative">
                         <input
@@ -80,6 +83,9 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, id }
                     </button>
                 </div>
             </form>
+        </div>
+        </div>
+        </div>
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo  } from 'react';
+import React, { useEffect, useState, useMemo, useRef   } from 'react';
 import StackGrid from "react-stack-grid";
 import Background from '../../src/Assets/header_center.png';
 import { collection, onSnapshot } from 'firebase/firestore';
@@ -7,12 +7,19 @@ import BoxCreateMessage from './BoxCreateMessage';
 import Footer from './Footer';
 import AddMessage from './AddMessage';
 import ButtonCreateMessage from './ButtonCreateMessage';
+import DeleteMessage from './DeleteMessage';
+import BigTagMessage from './BigTagMessage';
 import TagMessage from './TagMessage';
+import UpdateMessage from './UpdateMessage';
 import Snowfall from 'react-snowfall'
 import hoadao from "../Assets/hoa_dao.png"
 import hoamai from "../Assets/hoa_mai.png"
 const Layout = () => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
+    const [isShowBigTag, setIsShowBigTag] = useState(false);
+    const [isOpenDeleteMessage, setIsOpenDeleteMessage] = useState(false);
+    const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
+    const [currentBigTag, setcurrentBigTag] = useState('');
     const [scrollY, setScrollY] = useState(false);
     const [messages, setMessages] = useState([]);
     const dbMessages = collection(db, 'messages');
@@ -92,17 +99,58 @@ const Layout = () => {
                 />
             )}
             <div className="max-w-[1400px] px-4 mx-auto mt-14">
-               
                     <StackGrid
+                        monitorImagesLoaded={true}
+                        StackGrid
                         gutterHeight={32}
                         gutterWidth={32}
                         columnWidth = {300}
                     >
                         {messages.map((element, index) => (
-                            <TagMessage  key={index} data={element}/>
+                            <TagMessage  
+                                key={index} 
+                                data={element} 
+                                isShowBigTag={isShowBigTag} 
+                                setIsShowBigTag= {setIsShowBigTag}
+                                currentBigTag = {currentBigTag}
+                                setcurrentBigTag = {setcurrentBigTag}
+                                setIsOpenDeleteMessage = {setIsOpenDeleteMessage}
+                                setIsOpenUpdateMessage = {setIsOpenUpdateMessage}
+                            />
                         ))}
                     </StackGrid>
             </div>
+            {isShowBigTag && !isOpenCreateMessage && currentBigTag &&
+            (
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
+                    <BigTagMessage
+                        dataBigTag = {currentBigTag}
+                        setIsShowBigTag = {setIsShowBigTag}
+                    />
+                </div>
+            )
+            }
+            {isOpenDeleteMessage &&
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
+                <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
+                <div className="relative z-10 w-1/2">
+                    <DeleteMessage
+                        isOpenUpdateMessage={isOpenDeleteMessage}
+                        setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                        data={currentBigTag}
+                    />
+                </div>
+            </div>
+            }
+            {isOpenUpdateMessage && (
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
+                    <UpdateMessage
+                        isOpenUpdateMessage={isOpenUpdateMessage}
+                        setIsOpenUpdateMessage={setIsOpenUpdateMessage}
+                        data={currentBigTag}
+                    />
+                </div>
+            )}
             {/* <Footer /> */}
         </div>
     );

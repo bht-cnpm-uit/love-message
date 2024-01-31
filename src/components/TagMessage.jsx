@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import moment from 'moment';
-import UpdateMessage from './UpdateMessage';
-import DeleteMessage from './DeleteMessage';
 import LinesEllipsis from 'react-lines-ellipsis';
-import responsiveHOC from 'react-lines-ellipsis/lib/responsiveHOC'
 
 const mapColor = {
     '#ff0000': ['bg-red-100/75', 'border-red-300'],
@@ -13,10 +10,8 @@ const mapColor = {
     '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
 };
 
-const TagMessage = (data, id) => {
+const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag, setIsOpenDeleteMessage, setIsOpenUpdateMessage}) => {
     const [option, setOption] = useState(false);
-    const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
-    const [isOpenDeleteMessage, setIsOpenDeleteMessage] = useState(false);
 
     const ref = useRef(null);
     useOutside(ref);
@@ -49,58 +44,51 @@ const TagMessage = (data, id) => {
         }, []);
     }
 
+    const handleShowBigTag = () => {
+        setIsShowBigTag(true);
+        setcurrentBigTag(data);
+    }
     return (
-        <div className="tagMessage font-mono align-bottom">
-            {isOpenUpdateMessage && (
-                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-                    <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                    <div className="relative z-10 w-1/2">
-                        <UpdateMessage
-                            isOpenUpdateMessage={isOpenUpdateMessage}
-                            setIsOpenUpdateMessage={setIsOpenUpdateMessage}
-                            data={data}
-                        />
-                    </div>
-                </div>
-            )}
-
-            {isOpenDeleteMessage && (
-                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-                    <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                    <div className="relative z-10 w-1/2">
-                        <DeleteMessage
-                            isOpenUpdateMessage={isOpenDeleteMessage}
-                            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
-                            data={data}
-                        />
-                    </div>
-                </div>
-            )}
+        <div className={`${data.id === currentBigTag.id && isShowBigTag ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer`}
+            onClick={handleShowBigTag}
+        >
             <div
                 className={`relative justify-center items-center p-4 ${
-                    mapColor[data.data.color][0]
-                } text-black rounded-[25px] border-4 ${mapColor[data.data.color][1]}`}
+                    mapColor[data.color][0]
+                } text-black rounded-[25px] border-4 ${mapColor[data.color][1]}`}
             >
                 <span className="text-xs inline">
-                    <span className="mr-2 font-semibold">{data.data.nickname}</span>
+                    <span className="mr-2 font-semibold">{data.nickname}</span>
                     <span>
-                        {moment.unix(data.data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
+                        {moment.unix(data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
                     </span>
                 </span>
 
-                <FaEllipsisV onClick={handleOption} className="float-right inline text-xs" />
+                <FaEllipsisV
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        handleOption();
+                    }}
+                    className="float-right inline text-xs"
+                />
                 {option ? (
                     <div ref={ref} className="text-base absolute top-8 right-0 rounded-lg bg-white">
                         <button
                             className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200"
-                            onClick={handleClickOpenUpdateMessage}
+                            onClick = {(e) => {
+                                e.stopPropagation();
+                                handleClickOpenUpdateMessage();
+                            }}
                         >
                             Sửa
                         </button>
                         <button
                             ref={ref}
                             className="block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200"
-                            onClick={handleClickOpenDeleteMessage}
+                            onClick = {(e) => {
+                                e.stopPropagation();
+                                handleClickOpenDeleteMessage();
+                            }}
                         >
                             Xóa
                         </button>
@@ -110,13 +98,13 @@ const TagMessage = (data, id) => {
                 )}
 
                 <LinesEllipsis
-                    text={data.data.message}
+                    text={data.message}
                     className="block mt-4 mb-14 font-bold"
                     maxLine={5}
                     ellipsis="...Hiện thêm..."
                     isClamped
                 />
-                {/* <p className="block mt-4 mb-14 font-bold">{data.data.message}</p> */}
+                {/* <p className="block mt-4 mb-14 font-bold">{data.message}</p> */}
                 <div className="absolute bottom-0 right-8 ">
                     <svg
                         className="inline mr-4 hover:scale-110 ease-in duration-200"
@@ -174,8 +162,8 @@ const TagMessage = (data, id) => {
                         />
                     </svg>
                     <div>
-                        <span className="ml-2 ">{data.data.reacts.heart}</span>
-                        <span className="ml-10 ">{data.data.reacts.sad}</span>
+                        <span className="ml-2 ">{data.reacts.heart}</span>
+                        <span className="ml-10 ">{data.reacts.sad}</span>
                     </div>
                 </div>
             </div>
