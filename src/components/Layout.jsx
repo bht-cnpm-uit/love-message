@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo  } from 'react';
 import StackGrid from "react-stack-grid";
-import Background from '../../src/Assets/dungdua_header.gif';
+import Background from '../../src/Assets/header_center.png';
 import { collection, onSnapshot } from 'firebase/firestore';
 import {db } from '../config/firebase';
 import BoxCreateMessage from './BoxCreateMessage';
@@ -52,7 +52,7 @@ const Layout = () => {
       }, [hoadao, hoamai]);
     
     return (
-        <>
+        <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-red-400 to-90%">
             <Snowfall 
                 color="red"
                 snowflakeCount={40}
@@ -105,7 +105,7 @@ const Layout = () => {
                     </StackGrid>
             </div>
             {/* <Footer /> */}
-        </>
+        </div>
     );
 };
 
