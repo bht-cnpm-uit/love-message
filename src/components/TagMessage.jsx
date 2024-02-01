@@ -12,6 +12,7 @@ const mapColor = {
 
 const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag,isOpenDeleteMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage}) => {
     const [option, setOption] = useState(false);
+    const [onHover, setOnHover] = useState(false)
 
     const ref = useRef(null);
     useOutside(ref);
@@ -51,17 +52,19 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
         setcurrentBigTag(data);
     }
     return (
-        <div className={`${data.id === currentBigTag.id && (isShowBigTag || isOpenDeleteMessage || isOpenUpdateMessage) ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer`}
+        <div className={`${data.id === currentBigTag.id && (isShowBigTag || isOpenDeleteMessage || isOpenUpdateMessage) ? 'opacity-0' : ''} tagMessage font-mono align-bottom hover:cursor-pointer transition hover:-translate-y-1`}
             onClick={handleShowBigTag}
+            onMouseEnter={() => setOnHover(true)}
+            onMouseLeave={() => setOnHover(false)}
         >
             <div
                 className={`relative justify-center items-center p-4 ${
                     mapColor[data.color][0]
                 } text-black rounded-[25px] border-4 ${mapColor[data.color][1]}`}
             >
-                <span className="text-xs inline">
+                <span className= {`text-xs inline`} >
                     <span className="mr-2 font-semibold">{data.nickname}</span>
-                    <span>
+                    <span className={`${onHover ? '':'hidden'}`}>
                         {moment.unix(data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
                     </span>
                 </span>
@@ -71,7 +74,7 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
                         e.stopPropagation();
                         handleOption();
                     }}
-                    className="float-right inline text-xs"
+                    className={`${onHover ? '':'hidden'} float-right inline text-xs`}
                 />
                 {option ? (
                     <div ref={ref} className="text-base absolute top-8 right-0 rounded-lg bg-white">

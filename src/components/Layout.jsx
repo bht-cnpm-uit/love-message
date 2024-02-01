@@ -59,7 +59,7 @@ const Layout = () => {
       }, [hoadao, hoamai]);
     
     return (
-        <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-red-400 to-90%">
+        <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-blue-200 to-90%">
             <Snowfall 
                 color="red"
                 snowflakeCount={40}
