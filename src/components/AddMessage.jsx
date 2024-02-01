@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { db } from '../config/firebase';
+import { app, auth, db } from '../config/firebase';
+import { Fa500Px } from 'react-icons/fa';
 
 const mapColor = {
     '#ff0000': ['bg-red-100/75', 'border-red-300'],
@@ -10,7 +11,9 @@ const mapColor = {
     '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
 };
 
-const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
+const minLength = 50;
+
+const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     const [data, setData] = useState({
         nickname: '',
         password: '',
@@ -23,22 +26,32 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
         },
         updatedTime: serverTimestamp(),
     });
-
-    const handleUpdate = () => {
-        setIsOpenCreateMessage(!isOpenCreateMessage);
-        // Xử lý logic khi nhấn nút Cập nhật
-        console.log('Thông tin đã được cập nhật:', {
-            displayName: data.nickname,
-            password: data.password,
-            message: data.message,
-            selectedColor: data.color,
-        });
-    };
+    //password status: initial, writing, empty, error
+    const [passwordStatus, setPasswordStatus] = useState('initial');
+    const [messageStatus, setMessageStatus] = useState('initial');
+    const [nameStatus, setNameStatus] = useState('initial');
 
     const handleCreateMessage = async () => {
         try {
+            let bug = false;
+            if (data.nickname.length > 15) {
+                setNameStatus('error');
+                bug = true;
+            }
+
+            if (data.password == '') {
+                setPasswordStatus('empty');
+                bug = true;
+            }
+
+            if (data.message.length < 50) {
+                setMessageStatus('error');
+                bug = true;
+            }
+            if (bug) return;
+
             const docRef = await addDoc(collection(db, 'messages'), {
-                nickname: data.nickname,
+                nickname: data.nickname == '' ? 'Ẩn danh' : data.nickname,
                 password: data.password,
                 message: data.message,
                 color: data.color,
@@ -63,52 +76,81 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     };
 
     return (
-        <div className="max-w-md mx-auto my-8">
+        <div class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class={`${mapColor[data.color][0]} ${
+                    mapColor[data.color][1]
+                } border-4 relative rounded-lg shadow-md`}>
+            <div class="p-4 md:p-5">
             <form
-                className={`${mapColor[data.data.color][0]} ${
-                    mapColor[data.data.color][1]
-                } border-8 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4`}
+                className={`space-y-4`}
             >
                 <div className="mb-4">
                     <div className="relative">
                         <input
-                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
+                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight rounded-lg"
                             id="displayName"
                             type="text"
                             placeholder="Tên hiển thị"
-                            value={displayName}
-                            onChange={(e) => setDisplayName(e.target.value)}
+                            value={data.nickname}
+                            onChange={(e) => {
+                                setData({ ...data, nickname: e.target.value });
+                                setNameStatus('writing');
+                            }}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
-                        {/* Đường kẻ dưới input khi được focus */}
                     </div>
+                    {nameStatus === 'error' && (
+                        <span style={{ color: 'red', fontStyle: 'italic' }}>
+                            Tên phải nhỏ hơn 15 ký tự
+                        </span>
+                    )}
                 </div>
 
                 <div className="mb-4">
                     <div className="relative">
                         <input
-                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
+                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight rounded-lg"
                             id="password"
                             type="password"
                             placeholder="Mật khẩu"
                             value={data.password}
-                            onChange={(e) => setData({ ...data, password: e.target.value })}
+                            onChange={(e) => {
+                                setData({ ...data, password: e.target.value });
+                                setPasswordStatus('writing');
+                                if (e.target.value == '') setPasswordStatus('empty');
+                                console.log(passwordStatus);
+                            }}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
                     </div>
+                    {passwordStatus === 'empty' && (
+                        <span style={{ color: 'red', fontStyle: 'italic' }}>
+                            Vui lòng nhập mật khẩu
+                        </span>
+                    )}
                 </div>
 
                 <div className="mb-4">
                     <div className="relative">
                         <textarea
-                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
+                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight rounded-lg"
                             id="message"
                             placeholder="Lời nhắn"
                             value={data.message}
-                            onChange={(e) => setData({ ...data, message: e.target.value })}
+                            onChange={(e) => {
+                                setData({ ...data, message: e.target.value });
+                                setMessageStatus('writing');
+                            }}
                             style={{ fontFamily: 'Dancing Script' }}
+                            rows={5}
                         ></textarea>
                     </div>
+                    {messageStatus === 'error' && (
+                        <span style={{ color: 'red', fontStyle: 'italic' }}>
+                            Tin nhắn phải lớn hơn 50 kí tự
+                        </span>
+                    )}
                 </div>
 
                 <ColorPicker data={data} setData={setData} />
@@ -134,7 +176,10 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                 </div>
             </form>
         </div>
+        </div>
+        </div>
+        </div>
     );
 };
 
-export default AddMessage;
+export default AddMessageTest;
