@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { app, auth, db } from '../config/firebase';
-import { Fa500Px } from 'react-icons/fa';
 const minLength = 50;
 
 const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
@@ -18,6 +17,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
             heart: 0,
             haha: 0,
             sad: 0,
+            fighting:0,
         },
         updatedTime: serverTimestamp(),
     });
@@ -47,15 +47,11 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
             if (bug) return;
 
             const docRef = await addDoc(collection(db, 'messages'), {
-                nickname: data.nickname == '' ? 'Ẩn danh' : data.nickname,
+                nickname: data.nickname == '' ? 'Cú ẩn danh' : data.nickname,
                 password: data.password,
                 message: data.message,
                 color: data.color,
-                reacts: {
-                    heart: 0,
-                    haha: 0,
-                    sad: 0,
-                },
+                reacts: data.reacts,
                 createdTime: serverTimestamp(),
                 updatedTime: serverTimestamp(),
             });

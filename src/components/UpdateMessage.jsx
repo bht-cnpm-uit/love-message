@@ -17,6 +17,7 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
             heart: 0,
             haha: 0,
             sad: 0,
+            fighting:0,
         },
         updatedTime: '',
     });
