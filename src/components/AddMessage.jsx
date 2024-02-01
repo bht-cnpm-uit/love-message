@@ -30,6 +30,7 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     const [passwordStatus, setPasswordStatus] = useState('initial');
     const [messageStatus, setMessageStatus] = useState('initial');
     const [nameStatus, setNameStatus] = useState('initial');
+    const [isshowRcmNickname, setIsshowRcmNickname] = useState(false)
 
     const handleCreateMessage = async () => {
         try {
@@ -86,9 +87,9 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                 className={`space-y-4`}
             >
                 <div className="mb-4">
-                    <div className="relative">
+                    <div className="relative flex flex-row">
                         <input
-                            className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight rounded-lg"
+                            className="w-4/5 border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight rounded-lg"
                             id="displayName"
                             type="text"
                             placeholder="Tên hiển thị"
@@ -99,6 +100,50 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                             }}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
+                        <div className="ml-2 recommend-nickname">
+
+                    <div className="recommend-nickname"
+                        onMouseEnter={() => setIsshowRcmNickname(true)}
+                        onMouseLeave={() => setIsshowRcmNickname(false)}
+                    >
+                        <button
+                            className="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+                            type="button"
+                        >
+                            Nickname
+                            <svg className="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4"/>
+                            </svg>
+                        </button>
+
+                        {isshowRcmNickname && (
+                            <div id="dropdownHover" className="z-10 fixed bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
+                                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                                    <li
+                                        onClick={() => {data.nickname = "Cú ẩn danh"; setIsshowRcmNickname(false)}}
+                                    >
+                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú ẩn danh</a>
+                                    </li>
+                                    <li
+                                        onClick={() => {data.nickname = "Cú truyền thông"; setIsshowRcmNickname(false)}}
+                                    >
+                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú truyền thông</a>
+                                    </li>
+                                    <li
+                                        onClick={() => {data.nickname = "Cú in lít"; setIsshowRcmNickname(false)}}
+                                    >
+                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú in lít</a>
+                                    </li>
+                                    <li
+                                        onClick={() => {data.nickname = "Cú học thuật"; setIsshowRcmNickname(false)}}
+                                    >
+                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú học thuật</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                </div>
                     </div>
                     {nameStatus === 'error' && (
                         <span style={{ color: 'red', fontStyle: 'italic' }}>
