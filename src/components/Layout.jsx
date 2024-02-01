@@ -92,12 +92,16 @@ const Layout = () => {
                 </div>
             )
             }
-            {scrollY && (
+            {/* {scrollY && (
                 <ButtonCreateMessage
                     isOpenCreateMessage={isOpenCreateMessage}
                     setIsOpenCreateMessage={setIsOpenCreateMessage}
                 />
-            )}
+            )} */}
+            <ButtonCreateMessage
+                isOpenCreateMessage={isOpenCreateMessage}
+                setIsOpenCreateMessage={setIsOpenCreateMessage}
+            />
             <div className="max-w-[1400px] px-4 mx-auto mt-14">
                     <StackGrid
                         monitorImagesLoaded={true}

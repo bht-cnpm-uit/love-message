@@ -108,27 +108,27 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                         </button>
 
                         {isshowRcmNickname && (
-                            <div id="dropdownHover" className="z-10 fixed bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700">
+                            <div id="dropdownHover" className="z-10 fixed bg-white divide-y divide-gray-100 rounded-lg shadow cursor-pointer dark:bg-gray-700">
                                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
                                     <li
                                         onClick={() => {data.nickname = "Cú ẩn danh"; setIsshowRcmNickname(false)}}
                                     >
-                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú ẩn danh</a>
+                                        <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú ẩn danh</span>
                                     </li>
                                     <li
                                         onClick={() => {data.nickname = "Cú truyền thông"; setIsshowRcmNickname(false)}}
                                     >
-                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú truyền thông</a>
+                                        <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú truyền thông</span>
                                     </li>
                                     <li
                                         onClick={() => {data.nickname = "Cú in lít"; setIsshowRcmNickname(false)}}
                                     >
-                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú in lít</a>
+                                        <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú in lít</span>
                                     </li>
                                     <li
                                         onClick={() => {data.nickname = "Cú học thuật"; setIsshowRcmNickname(false)}}
                                     >
-                                        <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú học thuật</a>
+                                        <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cú học thuật</span>
                                     </li>
                                 </ul>
                             </div>

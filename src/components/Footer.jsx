@@ -6,12 +6,6 @@ const Footer = () => {
         <div className="w-full h-20 flex justify-end">
             <div
                 className="w-20 h-full"
-                style={{
-                    backgroundImage: `url(${ImageFooter})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                }}
             ></div>
         </div>
     );
