@@ -15,7 +15,10 @@ const ColorPicker = ({ data, setData }) => {
       bg_color: color[0],
       border_color: color[1],
     });
-    setData({ ...data, color: selectedColor });
+    setData({ ...data, color: {
+        bg_color: color[0],
+        border_color: color[1],
+      } });
   };
 
   return (
