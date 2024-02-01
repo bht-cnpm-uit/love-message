@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 
+const mapColor = {
+    '#ff0000': ['bg-red-100/75', 'border-red-300'],
+    '#00ff00': ['bg-green-100/75', 'border-green-300'],
+    '#0000ff': ['bg-blue-100/75', 'border-blue-300'],
+    '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
+};
+
 const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     const [displayName, setDisplayName] = useState('');
     const [password, setPassword] = useState('');
@@ -25,7 +32,11 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
 
     return (
         <div className="max-w-md mx-auto my-8">
-            <form className="bg-white border-yellow-500 border-8 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4">
+            <form
+                className={`${mapColor[data.data.color][0]} ${
+                    mapColor[data.data.color][1]
+                } border-8 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4`}
+            >
                 <div className="mb-4">
                     <div className="relative">
                         <input

@@ -96,6 +96,7 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
                                 setNewMessage(e.target.value);
                             }}
                             style={{ fontFamily: 'Dancing Script' }}
+                            rows={5}
                         ></textarea>
                         {/* Đường kẻ dưới input khi được focus */}
                     </div>
