@@ -7,15 +7,15 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, id }
     const [passwordStatus, setPasswordStatus] = useState('initial');
 
     const handleDelete = async () => {
-        if (data.data.password !== password) {
-            console.log('Sai mật khẩu: ' + password + '; id: ' + data.data.id);
+        if (data.password !== password) {
+            console.log('Sai mật khẩu: ' + password + '; id: ' + data.id);
             setPasswordStatus('error');
             return;
         }
 
         try {
             // Tạo reference đến document muốn xóa
-            const docRef = doc(db, 'messages', data.data.id);
+            const docRef = doc(db, 'messages', data.id);
             const docSnapshot = await getDoc(docRef);
 
             if (docSnapshot.exists()) {
@@ -36,18 +36,19 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, id }
     };
 
     return (
-        <div class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class="relative bg-white border-4 border-yellow-300 rounded-lg shadow-md">
-            <div class="p-4 md:p-5">
+        <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
+        <div className="relative p-4 w-full max-w-md max-h-full">
+        <div className="relative bg-white border-4 border-yellow-300 rounded-lg shadow-md">
+            <div className="p-4 md:p-5">
                 <form className="space-y-4">
                 <div className="mb-4">
                     <div className="relative">
-                        <input
+                    <input
                             className="w-full border-b-2 border-gray-300 focus:outline-none focus:border-yellow-500 py-2 px-3 text-gray-700 leading-tight"
                             id="password"
                             type="password"
                             placeholder="Mật khẩu"
+                            value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value);
                                 setPasswordStatus('writing');

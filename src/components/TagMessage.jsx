@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 import moment from 'moment';
-import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, serverTimestamp} from 'firebase/firestore';
 import { db } from '../config/firebase';
 import LinesEllipsis from 'react-lines-ellipsis';
 import "./style.css"
 
-const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag,isOpenDeleteMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage}) => {
+
+const TagMessage = ({ data, isShowBigTag, setIsShowBigTag, currentBigTag, setcurrentBigTag,isOpenDeleteMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage}) => {
     const [option, setOption] = useState(false);
     const [onHover, setOnHover] = useState(false)
     const [currentReacts, setCurrentReacts] = useState(data.reacts)
@@ -140,8 +141,7 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
                     text={data.message}
                     className="block mt-4 mb-14 font-bold"
                     maxLine={5}
-                    ellipsis="...Hiện thêm..."
-                    isClamped
+                    ellipsis="..."
                 />
                 {/* <p className="block mt-4 mb-14 font-bold">{data.message}</p> */}
                 <div className={`flex flex-row-reverse absolute bottom-0 w-full right-8`}>
