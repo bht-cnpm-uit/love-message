@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AddMessage from "./AddMessage";
 
 const BoxCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
 

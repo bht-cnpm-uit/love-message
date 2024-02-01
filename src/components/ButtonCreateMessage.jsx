@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AddMessage from "./AddMessage";
 import owl_img from "../Assets/owl.png"
 import "./style.css"
 
