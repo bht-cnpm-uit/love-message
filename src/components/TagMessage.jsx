@@ -47,6 +47,11 @@ const TagMessage = ({key, data, isShowBigTag, setIsShowBigTag, currentBigTag, se
         setIsShowBigTag(true);
         setcurrentBigTag(data);
     }
+    useEffect(() => {
+        if (currentReacts !== data.reacts) {
+          setCurrentReacts(data.reacts);
+        }
+      }, [data.reacts, currentReacts]);
     const updateReacts = async(reacts) => {
         try {
             // Tạo reference đến document muốn cập nhật
