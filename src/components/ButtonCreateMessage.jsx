@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import owl_img from "../Assets/owl.png"
-import music from "../Assets/NĂM QUA ĐÃ LÀM GÌ.mp3"
+import music from "../Assets/music.mp3"
 import "./style.css"
 
 const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
@@ -47,7 +47,7 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
         <div className="">
             <button
                 type="button"
-                className={`${isShowButton?"":"hidden"} fixed right-5 bottom-52 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500`}
+                className={`${isShowButton?"":"hidden"} fixed z-[300] right-5 bottom-52 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500`}
                 onClick={handleMusic}
                 >
                 {
@@ -66,7 +66,7 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
             <audio ref={audioRef} src={music} controls hidden />
             <button
                 type="button"
-                className={`${isShowButton?"":"hidden"} fixed right-5 bottom-36 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500`}
+                className={`${isShowButton?"":"hidden"} fixed z-[300] right-5 bottom-36 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500`}
                 onClick={handleOpenCreateMessage}
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -75,7 +75,7 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
             </button>
             <button
                 type="button"
-                className={`${isShowButton?"":"hidden"} fixed right-5 bottom-20 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500`}
+                className={`${isShowButton?"":"hidden"} fixed z-[300] right-5 bottom-20 text-pink-700 border border-pink-700 hover:bg-pink-700 hover:text-white focus:outline-none focus:ring-pink-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-pink-500 dark:text-pink-500 dark:hover:text-white dark:focus:ring-pink-800 dark:hover:bg-pink-500`}
                 onClick={handleClickOwl}
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
