@@ -5,7 +5,7 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import {db } from '../config/firebase';
 import BoxCreateMessage from './BoxCreateMessage';
 import Footer from './Footer';
-import AddMessage from './AddMessage';
+import AddMessageTest from './AddMessageTest';
 import ButtonCreateMessage from './ButtonCreateMessage';
 import DeleteMessage from './DeleteMessage';
 import BigTagMessage from './BigTagMessage';
@@ -85,7 +85,7 @@ const Layout = () => {
             {isOpenCreateMessage && 
             (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
-                    <AddMessage
+                    <AddMessageTest
                         isOpenCreateMessage={isOpenCreateMessage}
                         setIsOpenCreateMessage={setIsOpenCreateMessage}
                     />

@@ -76,11 +76,11 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     };
 
     return (
-        <div className="max-w-md mx-auto my-8">
+        <div className="max-w-96 mx-auto my-8">
             <form
                 className={`${mapColor[data.color][0]} ${
                     mapColor[data.color][1]
-                } border-8 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4`}
+                } border-8 rounded-lg shadow-md px-8 pt-6 pb-8 mb-4 w-96`}
             >
                 <div className="mb-4">
                     <div className="relative">
