@@ -3,22 +3,17 @@ import ColorPicker from './ColorPicker';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { app, auth, db } from '../config/firebase';
 import { Fa500Px } from 'react-icons/fa';
-
-const mapColor = {
-    '#ff0000': ['bg-red-100/75', 'border-red-300'],
-    '#00ff00': ['bg-green-100/75', 'border-green-300'],
-    '#0000ff': ['bg-blue-100/75', 'border-blue-300'],
-    '#ffff00': ['bg-yellow-100/75', 'border-yellow-300'],
-};
-
 const minLength = 50;
 
-const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
+const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     const [data, setData] = useState({
         nickname: '',
         password: '',
         message: '',
-        color: '#ff0000',
+        color : {
+            bg_color : "bg-yellow-100/75",
+            border_color : "border-yellow-300"
+        },
         reacts: {
             heart: 0,
             haha: 0,
@@ -79,8 +74,8 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     return (
         <div class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
-        <div class={`${mapColor[data.color][0]} ${
-                    mapColor[data.color][1]
+        <div class={`${data.color.bg_color} ${
+                    data.color.border_color 
                 } border-4 relative rounded-lg shadow-md`}>
             <div class="p-4 md:p-5">
             <form
@@ -227,4 +222,4 @@ const AddMessageTest = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
     );
 };
 
-export default AddMessageTest;
+export default AddMessage;
