@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import ColorPicker from './ColorPicker';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
-
-const BigTagMessage = ({ dataBigTag, setIsShowBigTag,isOpenDeleteMessage , setIsOpenDeleteMessage, isOpenUpdateMessage, setIsOpenUpdateMessage }) => {
+import UpdateMessage from './UpdateMessage';
+import DeleteMessage from './DeleteMessage';
+const BigTagMessage = ({
+    dataBigTag,
+    setIsShowBigTag,
+    setIsOpenDeleteMessage,
+    setIsOpenUpdateMessage,
+    isOpenUpdateMessage,
+    isOpenDeleteMessage,
+}) => {
     const [data, setData] = useState({
         ...dataBigTag,
     });
@@ -14,11 +22,9 @@ const BigTagMessage = ({ dataBigTag, setIsShowBigTag,isOpenDeleteMessage , setIs
 
     const handleClickOpenUpdateMessage = () => {
         setIsOpenUpdateMessage(true);
-        setcurrentBigTag(data);
     };
     const handleClickOpenDeleteMessage = () => {
         setIsOpenDeleteMessage(true);
-        setcurrentBigTag(data);
     };
 
     return (
@@ -50,13 +56,12 @@ const BigTagMessage = ({ dataBigTag, setIsShowBigTag,isOpenDeleteMessage , setIs
                                 </div>
                             </div>
                             <br />
-
-                            <div className="tools flex items-center justify-end">
+                            <div className={`tools flex items-center justify-end `}>
                                 <div className="mr-3">
                                     <button
-                                        className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="bg-[#E4BE4A] hover:bg-[#D4AE3E] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         type="button"
-                                        onClick = {(e) => {
+                                        onClick={(e) => {
                                             e.stopPropagation();
                                             handleClickOpenUpdateMessage();
                                         }}
@@ -65,11 +70,12 @@ const BigTagMessage = ({ dataBigTag, setIsShowBigTag,isOpenDeleteMessage , setIs
                                         Sửa
                                     </button>
                                 </div>
+
                                 <div className="mr-3">
                                     <button
-                                        className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="bg-[#E4BE4A] hover:bg-[#D4AE3E] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         type="button"
-                                        onClick = {(e) => {
+                                        onClick={(e) => {
                                             e.stopPropagation();
                                             handleClickOpenDeleteMessage();
                                         }}
@@ -79,7 +85,7 @@ const BigTagMessage = ({ dataBigTag, setIsShowBigTag,isOpenDeleteMessage , setIs
                                     </button>
                                 </div>
 
-                                <div className="">
+                                <div>
                                     <button
                                         className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         type="button"
