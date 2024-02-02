@@ -137,16 +137,13 @@ const Layout = () => {
             )
             }
             {isOpenDeleteMessage &&
-                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-                <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                <div className="relative z-10 w-1/2">
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <DeleteMessage
                         isOpenUpdateMessage={isOpenDeleteMessage}
                         setIsOpenDeleteMessage={setIsOpenDeleteMessage}
                         data={currentBigTag}
                     />
                 </div>
-            </div>
             }
             {isOpenUpdateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
@@ -157,7 +154,7 @@ const Layout = () => {
                     />
                 </div>
             )}
-            {/* <Footer /> */}
+            <Footer />
         </div>
     );
 };
