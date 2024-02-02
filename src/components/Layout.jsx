@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useMemo, useRef   } from 'react';
-import StackGrid from "react-stack-grid";
+import React, { useEffect, useState, useMemo, useRef } from 'react';
+import StackGrid from 'react-stack-grid';
 import Background from '../../src/Assets/header_center.png';
 import { collection, onSnapshot } from 'firebase/firestore';
-import {db } from '../config/firebase';
+import { db } from '../config/firebase';
 import BoxCreateMessage from './BoxCreateMessage';
 import Footer from './Footer';
 import AddMessage from './AddMessage';
@@ -11,9 +11,9 @@ import DeleteMessage from './DeleteMessage';
 import BigTagMessage from './BigTagMessage';
 import TagMessage from './TagMessage';
 import UpdateMessage from './UpdateMessage';
-import Snowfall from 'react-snowfall'
-import hoadao from "../Assets/hoa_dao.png"
-import hoamai from "../Assets/hoa_mai.png"
+import Snowfall from 'react-snowfall';
+import hoadao from '../Assets/hoa_dao.png';
+import hoamai from '../Assets/hoa_mai.png';
 const Layout = () => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
     const [isShowBigTag, setIsShowBigTag] = useState(false);
@@ -38,7 +38,7 @@ const Layout = () => {
         return () => {
             unsubscribe();
         };
-    }, []); 
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -56,16 +56,16 @@ const Layout = () => {
         const flower2 = document.createElement('img');
         flower2.src = hoamai;
         return [flower1, flower2];
-      }, [hoadao, hoamai]);
-    
+    }, [hoadao, hoamai]);
+
     return (
         <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-blue-200 to-90%">
-            <Snowfall 
+            <Snowfall
                 color="red"
                 snowflakeCount={40}
                 images={images}
                 radius={[10.0, 20.0]}
-                wind = {[-0.5, 2.0]}
+                wind={[-0.5, 2.0]}
                 style={{
                     position: 'fixed',
                     width: '100vw',
@@ -82,16 +82,14 @@ const Layout = () => {
                 isOpenCreateMessage={isOpenCreateMessage}
                 setIsOpenCreateMessage={setIsOpenCreateMessage}
             />
-            {isOpenCreateMessage && 
-            (
+            {isOpenCreateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <AddMessage
                         isOpenCreateMessage={isOpenCreateMessage}
                         setIsOpenCreateMessage={setIsOpenCreateMessage}
                     />
                 </div>
-            )
-            }
+            )}
             {/* {scrollY && (
                 <ButtonCreateMessage
                     isOpenCreateMessage={isOpenCreateMessage}
@@ -103,51 +101,53 @@ const Layout = () => {
                 setIsOpenCreateMessage={setIsOpenCreateMessage}
             />
             <div className="max-w-[1400px] px-4 mx-auto mt-14">
-                    <StackGrid
-                        monitorImagesLoaded={true}
-                        StackGrid
-                        gutterHeight={32}
-                        gutterWidth={32}
-                        columnWidth = {300}
-                    >
-                        {messages.map((element, index) => (
-                            <TagMessage  
-                                key={index} 
-                                data={element} 
-                                isShowBigTag={isShowBigTag} 
-                                setIsShowBigTag= {setIsShowBigTag}
-                                currentBigTag = {currentBigTag}
-                                setcurrentBigTag = {setcurrentBigTag}
-                                isOpenDeleteMessage = {isOpenDeleteMessage}
-                                setIsOpenDeleteMessage = {setIsOpenDeleteMessage}
-                                isOpenUpdateMessage = {isOpenUpdateMessage}
-                                setIsOpenUpdateMessage = {setIsOpenUpdateMessage}
-                            />
-                        ))}
-                    </StackGrid>
+                <StackGrid
+                    monitorImagesLoaded={true}
+                    StackGrid
+                    gutterHeight={32}
+                    gutterWidth={32}
+                    columnWidth={300}
+                >
+                    {messages.map((element, index) => (
+                        <TagMessage
+                            key={index}
+                            data={element}
+                            isShowBigTag={isShowBigTag}
+                            setIsShowBigTag={setIsShowBigTag}
+                            currentBigTag={currentBigTag}
+                            setcurrentBigTag={setcurrentBigTag}
+                            isOpenDeleteMessage={isOpenDeleteMessage}
+                            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                            isOpenUpdateMessage={isOpenUpdateMessage}
+                            setIsOpenUpdateMessage={setIsOpenUpdateMessage}
+                        />
+                    ))}
+                </StackGrid>
             </div>
-            {isShowBigTag && !isOpenCreateMessage && currentBigTag &&
-            (
+            {isShowBigTag && !isOpenCreateMessage && currentBigTag && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <BigTagMessage
-                        dataBigTag = {currentBigTag}
-                        setIsShowBigTag = {setIsShowBigTag}
-                    />
-                </div>
-            )
-            }
-            {isOpenDeleteMessage &&
-                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-                <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                <div className="relative z-10 w-1/2">
-                    <DeleteMessage
-                        isOpenUpdateMessage={isOpenDeleteMessage}
+                        dataBigTag={currentBigTag}
+                        setIsShowBigTag={setIsShowBigTag}
+                        isOpenDeleteMessage={isOpenDeleteMessage}
                         setIsOpenDeleteMessage={setIsOpenDeleteMessage}
-                        data={currentBigTag}
+                        isOpenUpdateMessage={isOpenUpdateMessage}
+                        setIsOpenUpdateMessage={setIsOpenUpdateMessage}
                     />
                 </div>
-            </div>
-            }
+            )}
+            {isOpenDeleteMessage && (
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
+                    <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
+                    <div className="relative z-10 w-1/2">
+                        <DeleteMessage
+                            isOpenUpdateMessage={isOpenDeleteMessage}
+                            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                            data={currentBigTag}
+                        />
+                    </div>
+                </div>
+            )}
             {isOpenUpdateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <UpdateMessage

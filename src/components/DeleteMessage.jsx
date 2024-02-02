@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { doc, getDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
-const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, id }) => {
+const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => {
     const [password, setPassword] = useState('');
     const [passwordStatus, setPasswordStatus] = useState('initial');
 
