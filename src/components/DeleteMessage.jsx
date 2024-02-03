@@ -67,7 +67,7 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => 
                 <br />
                 <div className="flex items-center justify-end">
                     <button
-                        className="bg-[#E4BE4A] hover:bg-[#D4AE3E] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
+                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4 hover:scale-110 ease-in duration-200"
                         type="button"
                         onClick={handleDelete}
                         style={{ fontFamily: 'Dancing Script' }}
@@ -75,7 +75,7 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => 
                         Xóa
                     </button>
                     <button
-                        className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
                         type="button"
                         onClick={handleCancel}
                         style={{ fontFamily: 'Dancing Script' }}

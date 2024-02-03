@@ -125,7 +125,7 @@ const TagMessage = ({
                 {option ? (
                     <div ref={ref} className="text-base absolute top-8 right-0 rounded-lg bg-white">
                         <button
-                            className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200"
+                            className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200 "
                             onClick={(e) => {
                                 e.stopPropagation();
                                 handleClickOpenUpdateMessage();

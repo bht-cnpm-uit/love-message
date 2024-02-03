@@ -60,7 +60,7 @@ const BigTagMessage = ({
                             <div className={`tools flex items-center justify-end `}>
                                 <div className="mr-3">
                                     <button
-                                        className="bg-[#E4BE4A] hover:bg-[#D4AE3E] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
                                         type="button"
                                         onClick={(e) => {
                                             e.stopPropagation();
@@ -74,7 +74,7 @@ const BigTagMessage = ({
 
                                 <div className="mr-3">
                                     <button
-                                        className="bg-[#E4BE4A] hover:bg-[#D4AE3E] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
                                         type="button"
                                         onClick={(e) => {
                                             e.stopPropagation();
@@ -88,7 +88,7 @@ const BigTagMessage = ({
 
                                 <div>
                                     <button
-                                        className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
                                         type="button"
                                         onClick={handleCancel}
                                         style={{ fontFamily: 'Dancing Script' }}
