@@ -22,6 +22,7 @@ const Layout = () => {
     const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
     const [currentBigTag, setcurrentBigTag] = useState('');
     const [isOpenQR, setIsOpenQR] = useState(false);
+    const [sortBy, setSortBy] = useState(null);
     const [scrollY, setScrollY] = useState(false);
     const [messages, setMessages] = useState([]);
     const dbMessages = collection(db, 'messages');
@@ -60,6 +61,46 @@ const Layout = () => {
         return [flower1, flower2];
     }, [hoadao, hoamai]);
 
+    const handleSortChange = (event) => {
+        setSortBy(event.target.value);
+    };
+
+    const sortByDate = (messages) => {
+        const copyMessages = messages.slice();
+        return copyMessages.sort((a, b) => {
+            const dateA = new Date(
+                a.updatedTime.seconds * 1000 + a.updatedTime.nanoseconds / 1000000,
+            );
+            const dateB = new Date(
+                b.updatedTime.seconds * 1000 + b.updatedTime.nanoseconds / 1000000,
+            );
+            return dateB - dateA;
+        });
+    };
+
+    // Hàm sắp xếp theo số lượng tổng react
+    const sortByReact = (messages) => {
+        const copyMessages = messages.slice();
+        return copyMessages.sort((a, b) => {
+            const totalReactA = Object.values(a.reacts).reduce((acc, curr) => acc + curr, 0);
+            const totalReactB = Object.values(b.reacts).reduce((acc, curr) => acc + curr, 0);
+            return totalReactB - totalReactA;
+        });
+    };
+
+    const getSortedMessages = () => {
+        if (sortBy === 'date') {
+            // Sắp xếp theo ngày mới nhất
+            return sortByDate(messages);
+        } else if (sortBy === 'interactions') {
+            // Sắp xếp theo số lượng tương tác nhiều nhất
+            return sortByReact(messages);
+        } else {
+            // Mặc định hiển thị mảng messages không sắp xếp
+            return messages;
+        }
+    };
+
     return (
         <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-blue-200 to-90%">
             <Snowfall
@@ -84,12 +125,42 @@ const Layout = () => {
                 isOpenCreateMessage={isOpenCreateMessage}
                 setIsOpenCreateMessage={setIsOpenCreateMessage}
             />
+            <div className="flex justify-start mb-4 items-center ml-16">
+                <div className="relative">
+                    <select
+                        value={sortBy}
+                        onChange={handleSortChange}
+                        className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline"
+                    >
+                        <option value="">Mặc định</option>
+                        <option value="date">Ngày mới nhất</option>
+                        <option value="interactions">Tương tác nhiều nhất</option>
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg
+                            className="fill-current h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                        >
+                            <path d="M0 0h20v20H0z" fill="none" />
+                            <path
+                                d="M7 7l3-3 3 3M7 13l3 3 3-3M10 18v-6"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
             {isOpenCreateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <AddMessage
                         isOpenCreateMessage={isOpenCreateMessage}
                         setIsOpenCreateMessage={setIsOpenCreateMessage}
-                        setIsOpenQR = {setIsOpenQR}
+                        setIsOpenQR={setIsOpenQR}
                     />
                 </div>
             )}
@@ -111,7 +182,7 @@ const Layout = () => {
                     gutterWidth={32}
                     columnWidth={300}
                 >
-                    {messages.map((element, index) => (
+                    {getSortedMessages().map((element, index) => (
                         <TagMessage
                             key={index}
                             data={element}
@@ -141,22 +212,21 @@ const Layout = () => {
             )}
             {isOpenQR && !isOpenCreateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
-                    <QRComponet setIsOpenQR={setIsOpenQR}/>
+                    <QRComponet setIsOpenQR={setIsOpenQR} />
                 </div>
-            )
-            }
+            )}
             {isOpenDeleteMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-                <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
-                <div className="relative z-10 w-1/2">
-                    <DeleteMessage
-                        isOpenUpdateMessage={isOpenDeleteMessage}
-                        setIsOpenDeleteMessage={setIsOpenDeleteMessage}
-                        data={currentBigTag}
-                    />
+                    <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
+                    <div className="relative z-10 w-1/2">
+                        <DeleteMessage
+                            isOpenUpdateMessage={isOpenDeleteMessage}
+                            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                            data={currentBigTag}
+                        />
+                    </div>
                 </div>
-            </div>)
-            }
+            )}
             {isOpenUpdateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <UpdateMessage
