@@ -4,7 +4,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { app, auth, db } from '../config/firebase';
 const minLength = 50;
 
-const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
+const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage, setIsOpenQR }) => {
     const [data, setData] = useState({
         nickname: '',
         password: '',
@@ -56,6 +56,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) => {
                 updatedTime: serverTimestamp(),
             });
             setIsOpenCreateMessage(false);
+            setIsOpenQR(true);
         } catch (e) {
             console.log(e.message);
         }

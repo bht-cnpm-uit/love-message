@@ -10,6 +10,7 @@ import ButtonCreateMessage from './ButtonCreateMessage';
 import DeleteMessage from './DeleteMessage';
 import BigTagMessage from './BigTagMessage';
 import TagMessage from './TagMessage';
+import QRComponet from './QRComponent';
 import UpdateMessage from './UpdateMessage';
 import Snowfall from 'react-snowfall';
 import hoadao from '../Assets/hoa_dao.png';
@@ -20,6 +21,7 @@ const Layout = () => {
     const [isOpenDeleteMessage, setIsOpenDeleteMessage] = useState(false);
     const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
     const [currentBigTag, setcurrentBigTag] = useState('');
+    const [isOpenQR, setIsOpenQR] = useState(false);
     const [scrollY, setScrollY] = useState(false);
     const [messages, setMessages] = useState([]);
     const dbMessages = collection(db, 'messages');
@@ -87,6 +89,7 @@ const Layout = () => {
                     <AddMessage
                         isOpenCreateMessage={isOpenCreateMessage}
                         setIsOpenCreateMessage={setIsOpenCreateMessage}
+                        setIsOpenQR = {setIsOpenQR}
                     />
                 </div>
             )}
@@ -136,6 +139,12 @@ const Layout = () => {
                     />
                 </div>
             )}
+            {isOpenQR && !isOpenCreateMessage && (
+                <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
+                    <QRComponet setIsOpenQR={setIsOpenQR}/>
+                </div>
+            )
+            }
             {isOpenDeleteMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center">
                     <div className="absolute w-full h-full bg-gray-800 opacity-75"></div>
