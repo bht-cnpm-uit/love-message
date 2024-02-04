@@ -15,7 +15,7 @@ import UpdateMessage from './UpdateMessage';
 import Snowfall from 'react-snowfall';
 import hoadao from '../Assets/hoa_dao.png';
 import hoamai from '../Assets/hoa_mai.png';
-const Layout = () => {
+const Layout = (props) => {
     const [isOpenCreateMessage, setIsOpenCreateMessage] = useState(false);
     const [isShowBigTag, setIsShowBigTag] = useState(false);
     const [isOpenDeleteMessage, setIsOpenDeleteMessage] = useState(false);
@@ -23,10 +23,10 @@ const Layout = () => {
     const [currentBigTag, setcurrentBigTag] = useState('');
     const [isOpenQR, setIsOpenQR] = useState(false);
     const [sortBy, setSortBy] = useState(null);
-    const [scrollY, setScrollY] = useState(false);
+    // const [scrollY, setScrollY] = useState(false);
     const [messages, setMessages] = useState([]);
     const dbMessages = collection(db, 'messages');
-
+    const { width } = props;
     useEffect(() => {
         // Subscribe to the 'messages' collection using onSnapshot
         const unsubscribe = onSnapshot(dbMessages, (snapshot) => {
@@ -43,15 +43,15 @@ const Layout = () => {
         };
     }, []);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY > 500);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         setScrollY(window.scrollY > 500);
+    //     };
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
 
     const images = useMemo(() => {
         const flower1 = document.createElement('img');
@@ -114,13 +114,12 @@ const Layout = () => {
                     width: '100vw',
                 }}
             />
-            <header
-                className="bg-cover"
+            <div
+                className="bg-cover xl:h-96 lg:h-80 md:h-64 sm:h-48"
                 style={{
-                    height: '400px',
                     backgroundImage: `url(${Background})`,
                 }}
-            ></header>
+            ></div>
             <BoxCreateMessage
                 isOpenCreateMessage={isOpenCreateMessage}
                 setIsOpenCreateMessage={setIsOpenCreateMessage}
@@ -178,8 +177,9 @@ const Layout = () => {
                 <StackGrid
                     monitorImagesLoaded={true}
                     StackGrid
-                    gutterHeight={32}
-                    gutterWidth={32}
+                    gutterHeight={24}
+                    gutterWidth={24}
+                    
                     columnWidth={300}
                 >
                     {getSortedMessages().map((element, index) => (
