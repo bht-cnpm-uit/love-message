@@ -115,7 +115,7 @@ const Layout = (props) => {
                 }}
             />
             <div
-                className="bg-cover xl:h-96 lg:h-80 md:h-64 sm:h-48"
+                className="bg-cover h-40 xl:h-96 lg:h-80 md:h-64 sm:h-48"
                 style={{
                     backgroundImage: `url(${Background})`,
                 }}
