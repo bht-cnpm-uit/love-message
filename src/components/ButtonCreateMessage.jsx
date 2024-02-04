@@ -89,7 +89,7 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
                 onClick={handleClickOwl}
             />
             {showTooltip && !isShowButton && (
-                <div className="fixed z-[300] bg-pink-400 rounded-md pb-14 md:bottom-40 right-12 w-52 md:w-52 flex text-center">
+                <div className="fixed z-[300] bg-pink-400 rounded-md pb-14 bottom-40 right-12 w-52 flex text-center">
                     <div className="absolute">
                         <span className="tooltip text-sm text-white text-right">
                             Hãy gửi những lời yêu thương cùng cú nào !!!
