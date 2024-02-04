@@ -69,7 +69,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage, setIsOpenQR }
     };
 
     return (
-        <div class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
+        <div class="flex h-screen overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
         <div class={`${data.color.bg_color} ${
                     data.color.border_color 
@@ -99,7 +99,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage, setIsOpenQR }
                         onMouseLeave={() => setIsshowRcmNickname(false)}
                     >
                         <button
-                            className="text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
+                            className="text-white bg-pink-700 hover:bg-pink-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
                             type="button"
                         >
                             Nickname
@@ -195,7 +195,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage, setIsOpenQR }
 
                 <div className="flex items-center justify-end">
                     <button
-                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4 hover:scale-110 ease-in duration-200"
+                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-1.5 px-5 rounded focus:outline-none focus:shadow-outline mr-4 hover:scale-110 ease-in duration-200"
                         type="button"
                         onClick={handleCreateMessage}
                         style={{ fontFamily: 'Dancing Script' }}
@@ -203,7 +203,7 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage, setIsOpenQR }
                         Gửi lời nhắn
                     </button>
                     <button
-                        className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
+                        className="bg-[#adaa9d] hover:bg-[#ff5959] text-white font-bold py-1.5 px-5 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
                         type="button"
                         onClick={handleCancel}
                         style={{ fontFamily: 'Dancing Script' }}
