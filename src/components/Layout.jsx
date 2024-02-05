@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import StackGrid from 'react-stack-grid';
+import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import Background from '../../src/Assets/header_center.png';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../config/firebase';
@@ -23,7 +24,7 @@ const Layout = () => {
     const [isOpenUpdateMessage, setIsOpenUpdateMessage] = useState(false);
     const [currentBigTag, setcurrentBigTag] = useState('');
     const [isOpenQR, setIsOpenQR] = useState(false);
-    const [sortBy, setSortBy] = useState(null);
+    const [sortBy, setSortBy] = useState('default');
     const [messages, setMessages] = useState([]);
     const dbMessages = collection(db, 'messages');
     useEffect(() => {
@@ -129,29 +130,53 @@ const Layout = () => {
                 setIsOpenCreateMessage={setIsOpenCreateMessage}
             />
             <div className="max-w-[1400px] px-4 mx-auto mt-14">
-                <StackGrid
-                    monitorImagesLoaded={true}
-                    StackGrid
-                    gutterHeight={24}
-                    gutterWidth={24}
-                    
-                    columnWidth={300}
-                >
-                    {getSortedMessages().map((element, index) => (
-                        <TagMessage
-                            key={index}
-                            data={element}
-                            isShowBigTag={isShowBigTag}
-                            setIsShowBigTag={setIsShowBigTag}
-                            currentBigTag={currentBigTag}
-                            setcurrentBigTag={setcurrentBigTag}
-                            isOpenDeleteMessage={isOpenDeleteMessage}
-                            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
-                            isOpenUpdateMessage={isOpenUpdateMessage}
-                            setIsOpenUpdateMessage={setIsOpenUpdateMessage}
-                        />
-                    ))}
-                </StackGrid>
+                {
+                    sortBy === 'default' ?
+                    <StackGrid
+                        monitorImagesLoaded={true}
+                        StackGrid
+                        gutterHeight={24}
+                        gutterWidth={24}
+                        
+                        columnWidth={300}
+                    >
+                        {getSortedMessages().map((element, index) => (
+                            <TagMessage
+                                key={index}
+                                data={element}
+                                isShowBigTag={isShowBigTag}
+                                setIsShowBigTag={setIsShowBigTag}
+                                currentBigTag={currentBigTag}
+                                setcurrentBigTag={setcurrentBigTag}
+                                isOpenDeleteMessage={isOpenDeleteMessage}
+                                setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                                isOpenUpdateMessage={isOpenUpdateMessage}
+                                setIsOpenUpdateMessage={setIsOpenUpdateMessage}
+                            />
+                        ))}
+                    </StackGrid>
+                    :
+                    <ResponsiveMasonry
+                        columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200:4}}
+                    >
+                        <Masonry gutter="32px">
+                            {getSortedMessages().map((element, index) => (
+                                <TagMessage
+                                    key={index}
+                                    data={element}
+                                    isShowBigTag={isShowBigTag}
+                                    setIsShowBigTag={setIsShowBigTag}
+                                    currentBigTag={currentBigTag}
+                                    setcurrentBigTag={setcurrentBigTag}
+                                    isOpenDeleteMessage={isOpenDeleteMessage}
+                                    setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+                                    isOpenUpdateMessage={isOpenUpdateMessage}
+                                    setIsOpenUpdateMessage={setIsOpenUpdateMessage}
+                                />
+                            ))}
+                        </Masonry>
+                    </ResponsiveMasonry>
+                }
             </div>
             {isShowBigTag && !isOpenCreateMessage && currentBigTag && !isOpenDeleteMessage && !isOpenUpdateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
