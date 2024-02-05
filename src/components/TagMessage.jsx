@@ -17,15 +17,16 @@ const TagMessage = ({
     isOpenUpdateMessage,
     setIsOpenUpdateMessage,
 }) => {
-    const [option, setOption] = useState(false);
+    const [isShowOptions, setIsShowOptions] = useState(false);
+    // const [option, setOption] = useState(false);
     const [onHover, setOnHover] = useState(false);
     const [currentReacts, setCurrentReacts] = useState(data.reacts);
-    const ref = useRef(null);
-    useOutside(ref);
+    // const ref = useRef(null);
+    // useOutside(ref);
 
-    const handleOption = () => {
-        setOption(!option);
-    };
+    // const handleOption = () => {
+    //     setOption(!option);
+    // };
 
     const handleClickOpenUpdateMessage = () => {
         setIsOpenUpdateMessage(true);
@@ -36,22 +37,22 @@ const TagMessage = ({
         setcurrentBigTag(data);
     };
 
-    function useOutside(ref) {
-        useEffect(() => {
-            function handleClickOutside(event) {
-                // console.log(event.target)
-                if (ref.current && !ref.current.contains(event.target)) {
-                    setOption(false);
-                }
-            }
-            // Bind the event listener
-            document.addEventListener('click', handleClickOutside, true);
-            return () => {
-                // Unbind the event listener on clean up
-                document.removeEventListener('click', handleClickOutside, true);
-            };
-        }, []);
-    }
+    // function useOutside(ref) {
+    //     useEffect(() => {
+    //         function handleClickOutside(event) {
+    //             // console.log(event.target)
+    //             if (ref.current && !ref.current.contains(event.target)) {
+    //                 setOption(false);
+    //             }
+    //         }
+    //         // Bind the event listener
+    //         document.addEventListener('click', handleClickOutside, true);
+    //         return () => {
+    //             // Unbind the event listener on clean up
+    //             document.removeEventListener('click', handleClickOutside, true);
+    //         };
+    //     }, []);
+    // }
 
     const handleShowBigTag = () => {
         setIsShowBigTag(true);
@@ -108,45 +109,53 @@ const TagMessage = ({
             <div
                 className={`relative justify-center items-center p-4 ${data.color.bg_color} text-black rounded-[25px] border-4 ${data.color.border_color}`}
             >
-                <span className={`text-xs inline`}>
-                    <span className="mr-2 font-semibold">{data.nickname}</span>
-                    <span className={`${onHover ? '' : 'hidden'}`}>
-                        {moment.unix(data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
-                    </span>
-                </span>
-
-                <FaEllipsisV
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        handleOption();
-                    }}
-                    className={`${onHover ? '' : 'hidden'} float-right inline text-xs`}
-                />
-                {option ? (
-                    <div ref={ref} className="text-base absolute top-8 right-0 rounded-lg bg-white">
-                        <button
-                            className="block p-1 border-b-2 border-black hover:scale-110 ease-in duration-200 "
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleClickOpenUpdateMessage();
-                            }}
-                        >
-                            Sửa
-                        </button>
-                        <button
-                            ref={ref}
-                            className="block p-1 border-t-2 border-black hover:scale-110 ease-in duration-200"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                handleClickOpenDeleteMessage();
-                            }}
-                        >
-                            Xóa
-                        </button>
+                <div className="header w-full flex flex-row justify-between">
+                    <div className={`flex flex-col justify-start`}>
+                        <span className="text-base mr-2 font-semibold">{data.nickname}</span>
+                        <span className={`text-xs italic font-thin text-zinc-500 ${onHover ? '' : 'opacity-0'}`}>
+                            {moment.unix(data.createdTime?.seconds).format('HH:mm DD/MM/YYYY')}
+                        </span>
                     </div>
-                ) : (
-                    ''
-                )}
+                    <div 
+                        onMouseEnter={() => setIsShowOptions(true)}
+                        onMouseLeave={() => setIsShowOptions(false)}
+                    class="relative inline-block text-left">
+                        <div
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                () => setIsShowOptions(true)
+                            }}
+                        >
+                            <button type="button" className="inline-flex justify-center rounded-lg px-2 py-2 text-sm font-semibold text-gray-900 hover:text-pink-800" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                            </svg>
+                            </button>
+                        </div>
+                        {isShowOptions && (
+                            <div class="absolute right-0 z-10 w-28 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                                <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                                    <li
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleClickOpenUpdateMessage();
+                                        }}
+                                    >
+                                        <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Chỉnh sửa</span>
+                                    </li>
+                                    <li
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleClickOpenDeleteMessage();
+                                        }}
+                                    >
+                                        <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Xóa</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        )}
+                    </div>
+                </div>
 
                 <LinesEllipsis
                     text={data.message}
