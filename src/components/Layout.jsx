@@ -12,6 +12,7 @@ import BigTagMessage from './BigTagMessage';
 import TagMessage from './TagMessage';
 import QRComponet from './QRComponent';
 import UpdateMessage from './UpdateMessage';
+import Navigator from './Navigator';
 import Snowfall from 'react-snowfall';
 import hoadao from '../Assets/hoa_dao.png';
 import hoamai from '../Assets/hoa_mai.png';
@@ -61,8 +62,8 @@ const Layout = (props) => {
         return [flower1, flower2];
     }, [hoadao, hoamai]);
 
-    const handleSortChange = (event) => {
-        setSortBy(event.target.value);
+    const handleSortChange = (option) => {
+        setSortBy(option);
     };
 
     const sortByDate = (messages) => {
@@ -124,7 +125,7 @@ const Layout = (props) => {
                 isOpenCreateMessage={isOpenCreateMessage}
                 setIsOpenCreateMessage={setIsOpenCreateMessage}
             />
-            <div className="flex justify-start mb-4 items-center ml-16">
+            {/* <div className="flex justify-start mb-4 items-center ml-16">
                 <div className="relative">
                     <select
                         value={sortBy}
@@ -152,7 +153,8 @@ const Layout = (props) => {
                         </svg>
                     </div>
                 </div>
-            </div>
+            </div> */}
+            <Navigator handleSortChange={handleSortChange}/>
 
             {isOpenCreateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
