@@ -3,7 +3,7 @@ import ColorPicker from './ColorPicker';
 import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
-const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }) => {
+const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, setDataBigTag }) => {
     const [password, setPassword] = useState('');
     const [newMessage, setNewMessage] = useState(data.message);
     //password status: initial, writing, error, empty
@@ -47,6 +47,13 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, id }
                     color: tempDataForChangeColor.color,
                 };
                 await updateDoc(docRef, updateData, { merge: true });
+                const updatedDocSnapshot = await getDoc(docRef);
+                const updatedData = updatedDocSnapshot.data();
+                const documentId = updatedDocSnapshot.id;
+                setDataBigTag({
+                    ...updatedData,
+                    id: documentId
+                });
                 console.log('Document updated successfully!');
             } else {
                 console.log('Document does not exist!');

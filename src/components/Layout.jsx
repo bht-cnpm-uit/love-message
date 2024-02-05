@@ -157,6 +157,7 @@ const Layout = () => {
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <BigTagMessage
                         dataBigTag={currentBigTag}
+                        setDataBigTag = {setcurrentBigTag}
                         setIsShowBigTag={setIsShowBigTag}
                         isOpenDeleteMessage={isOpenDeleteMessage}
                         setIsOpenDeleteMessage={setIsOpenDeleteMessage}
@@ -178,6 +179,7 @@ const Layout = () => {
                             isOpenUpdateMessage={isOpenDeleteMessage}
                             setIsOpenDeleteMessage={setIsOpenDeleteMessage}
                             data={currentBigTag}
+                            setDataBigTag = {setcurrentBigTag}
                         />
                     </div>
                 </div>
@@ -188,6 +190,7 @@ const Layout = () => {
                         isOpenUpdateMessage={isOpenUpdateMessage}
                         setIsOpenUpdateMessage={setIsOpenUpdateMessage}
                         data={currentBigTag}
+                        setDataBigTag = {setcurrentBigTag}
                     />
                 </div>
             )}

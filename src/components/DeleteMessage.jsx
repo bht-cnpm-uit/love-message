@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import { doc, getDoc, deleteDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
-const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => {
+const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, setDataBigTag}) => {
     const [password, setPassword] = useState('');
     const [passwordStatus, setPasswordStatus] = useState('initial');
 
     const handleDelete = async () => {
         if (data.password !== password) {
-            console.log('Sai mật khẩu: ' + password + '; id: ' + data.id);
             setPasswordStatus('error');
             return;
         }
-
         try {
             // Tạo reference đến document muốn xóa
             const docRef = doc(db, 'messages', data.id);
@@ -21,6 +19,7 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => 
             if (docSnapshot.exists()) {
                 //Xóa
                 await deleteDoc(docRef);
+                setDataBigTag('')
                 console.log('Document deleted successfully!');
             } else {
                 console.log('Document does not exist!');
