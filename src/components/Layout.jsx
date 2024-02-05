@@ -153,7 +153,7 @@ const Layout = () => {
                     ))}
                 </StackGrid>
             </div>
-            {isShowBigTag && !isOpenCreateMessage && currentBigTag && (
+            {isShowBigTag && !isOpenCreateMessage && currentBigTag && !isOpenDeleteMessage && !isOpenUpdateMessage && (
                 <div className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <BigTagMessage
                         dataBigTag={currentBigTag}

@@ -68,9 +68,8 @@ const BigTagMessage = ({
         
     };
     return (
-        <div className={``}>
         <div className="flex h-screen font-bold overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
-            <div className="relative p-4 w-full max-w-md max-h-full">
+            <div className="relative p-4 w-full max-w-lg max-h-full">
                 <div className={`${dataBigTag.color.bg_color} ${dataBigTag.color.border_color} relative  border-4  rounded-lg shadow-md`}>
                     <div className="p-4 md:p-5">
                         <form className="space-y-4">
@@ -90,7 +89,7 @@ const BigTagMessage = ({
                             <div className="mb-2">
                                 <div className="relative">
                                     <p
-                                        className="w-full py-1 px-4 text-gray-700 leading-tight  text-base"
+                                        className="break-all w-full py-1 px-4 text-gray-700 leading-tight  text-base"
                                         id="message"
                                         style={{ fontFamily: 'monospace' }}
                                     >
@@ -318,7 +317,6 @@ const BigTagMessage = ({
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     );
 };
