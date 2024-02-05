@@ -38,7 +38,9 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => 
     return (
         <div className="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100% - 1rem)] max-h-full">
         <div className="relative p-4 w-full max-w-md max-h-full">
-        <div className={`relative bg-white border-4  rounded-lg shadow-md ${data.color.border_color}`}>
+        <div className={`${data.color.bg_color} ${
+                    data.color.border_color 
+                } relative border-4  rounded-lg shadow-md`}>
             <div className="p-4 md:p-5">
                 <form className="space-y-4">
                 <div className="mb-4">
@@ -58,16 +60,13 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => 
                             }}
                             style={{ fontFamily: 'Dancing Script' }}
                         />
-                        {/* Đường kẻ dưới input khi được focus */}
                     </div>
                     {passwordStatus === 'error' && "Sai mật khẩu"}
                     {passwordStatus === 'empty' && "Vui lòng nhập mật khẩu"}
                 </div>
-
-                <br />
                 <div className="flex items-center justify-end">
                     <button
-                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4 hover:scale-110 ease-in duration-200"
+                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-1.5 px-5 rounded focus:outline-none focus:shadow-outline mr-4 hover:scale-110 ease-in duration-200"
                         type="button"
                         onClick={handleDelete}
                         style={{ fontFamily: 'Dancing Script' }}
@@ -75,7 +74,7 @@ const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data}) => 
                         Xóa
                     </button>
                     <button
-                        className="text-pink-700 border-2 border-pink-700 hover:bg-pink-700 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
+                        className="bg-[#adaa9d] hover:bg-[#ff5959] text-white font-bold py-1.5 px-5 rounded focus:outline-none focus:shadow-outline hover:scale-110 ease-in duration-200"
                         type="button"
                         onClick={handleCancel}
                         style={{ fontFamily: 'Dancing Script' }}
