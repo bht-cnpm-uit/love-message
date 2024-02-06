@@ -24,12 +24,12 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, setD
 
     const handleUpdate = async () => {
         if (data.password !== password) {
-            console.log('Sai mật khẩu: ' + password + '; id: ' + data.id);
+            // console.log('Sai mật khẩu: ' + password + '; id: ' + data.id);
             setPasswordStatus('error');
             return;
         }
-        if (data.message === newMessage && data.color === tempDataForChangeColor.color) {
-            console.log('Không thay đổi gì');
+        if (data.message === newMessage) {
+            // console.log('Không thay đổi gì');
             return;
         }
 

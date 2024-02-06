@@ -98,7 +98,6 @@ const ButtonCreateMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage }) =>
                 </div>
             )}
         </div>
-
     );
 };
 

@@ -4,7 +4,7 @@ import { db } from '../config/firebase';
 
 const DeleteMessage = ({ isOpenDeleteMessage, setIsOpenDeleteMessage, data, setDataBigTag}) => {
     const [password, setPassword] = useState('');
-    const [passwordStatus, setPasswordStatus] = useState('initial');
+    const [passwordStatus, setPasswordStatus] = useState('');
 
     const handleDelete = async () => {
         if (data.password !== password) {
