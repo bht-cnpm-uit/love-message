@@ -59,10 +59,10 @@ const Layout = () => {
         const copyMessages = messages.slice();
         return copyMessages.sort((a, b) => {
             const dateA = new Date(
-                a.updatedTime.seconds * 1000 + a.updatedTime.nanoseconds / 1000000,
+                a.updatedTime?.seconds * 1000 + a.updatedTime?.nanoseconds / 1000000,
             );
             const dateB = new Date(
-                b.updatedTime.seconds * 1000 + b.updatedTime.nanoseconds / 1000000,
+                b.updatedTime?.seconds * 1000 + b.updatedTime?.nanoseconds / 1000000,
             );
             return dateB - dateA;
         });
