@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ColorPicker from './ColorPicker';
 import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
@@ -7,7 +6,7 @@ const UpdateMessage = ({ isOpenUpdateMessage, setIsOpenUpdateMessage, data, setD
     const [password, setPassword] = useState('');
     const [newMessage, setNewMessage] = useState(data.message);
     //password status: initial, writing, error, empty
-    const [passwordStatus, setPasswordStatus] = useState('initial');
+    const [passwordStatus, setPasswordStatus] = useState();
     const [tempDataForChangeColor, setTempDataForChangeColor] = useState({
         nickname: '',
         password: '',

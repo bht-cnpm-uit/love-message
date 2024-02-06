@@ -22,9 +22,9 @@ const AddMessage = ({ isOpenCreateMessage, setIsOpenCreateMessage, setIsOpenQR }
         updatedTime: serverTimestamp(),
     });
     //password status: initial, writing, empty, error
-    const [passwordStatus, setPasswordStatus] = useState('initial');
-    const [messageStatus, setMessageStatus] = useState('initial');
-    const [nameStatus, setNameStatus] = useState('initial');
+    const [passwordStatus, setPasswordStatus] = useState();
+    const [messageStatus, setMessageStatus] = useState();
+    const [nameStatus, setNameStatus] = useState();
     const [isshowRcmNickname, setIsshowRcmNickname] = useState(false)
 
     const handleCreateMessage = async () => {

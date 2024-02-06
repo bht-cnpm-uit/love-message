@@ -46,13 +46,16 @@ const BigTagMessage = ({
                 };
                 await updateDoc(docRef, updateData, { merge: true });
                 const updatedDocSnapshot = await getDoc(docRef);
-                const updatedData = updatedDocSnapshot.data();
-                setDataBigTag(updatedData)
+                setDataBigTag({
+                    ...dataBigTag,
+                    reacts:updatedDocSnapshot.data().reacts
+                });
             } else {
                 console.log('Document does not exist!');
             }
             setIsOpenUpdateMessage(false);
-        } catch (error) {
+        } 
+        catch (error) {
             console.error('Error updating document:', error);
         }
     };

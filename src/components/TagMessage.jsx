@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { FaEllipsisV } from 'react-icons/fa';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
-import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import LinesEllipsis from 'react-lines-ellipsis';
 import './style.css';
@@ -18,15 +17,8 @@ const TagMessage = ({
     setIsOpenUpdateMessage,
 }) => {
     const [isShowOptions, setIsShowOptions] = useState(false);
-    // const [option, setOption] = useState(false);
     const [onHover, setOnHover] = useState(false);
     const [currentReacts, setCurrentReacts] = useState(data.reacts);
-    // const ref = useRef(null);
-    // useOutside(ref);
-
-    // const handleOption = () => {
-    //     setOption(!option);
-    // };
 
     const handleClickOpenUpdateMessage = () => {
         setIsOpenUpdateMessage(true);
@@ -146,7 +138,6 @@ const TagMessage = ({
                     maxLine={5}
                     ellipsis="..."
                 />
-                {/* <p className="block mt-4 mb-14 font-bold">{data.message}</p> */}
                 <div className={`flex flex-row-reverse absolute bottom-0 w-full right-8`}>
                     <div
                         className="ml-3 flex flex-col justify-center items-center"
