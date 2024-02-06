@@ -89,7 +89,7 @@ const BigTagMessage = ({
                             <div className="mb-2">
                                 <div className="relative">
                                     <p
-                                        className="break-all w-full py-1 px-4 text-gray-700 leading-tight  text-base"
+                                        className="text-wrap break-words w-full py-1 px-4 text-gray-700 leading-tight text-base"
                                         id="message"
                                         style={{ fontFamily: 'monospace' }}
                                     >
