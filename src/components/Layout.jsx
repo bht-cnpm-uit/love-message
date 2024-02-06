@@ -91,6 +91,20 @@ const Layout = () => {
         }
     };
 
+    const sortedMessages = getSortedMessages().map((element, index) => (
+        <TagMessage
+            key={index}
+            data={element}
+            isShowBigTag={isShowBigTag}
+            setIsShowBigTag={setIsShowBigTag}
+            currentBigTag={currentBigTag}
+            setcurrentBigTag={setcurrentBigTag}
+            isOpenDeleteMessage={isOpenDeleteMessage}
+            setIsOpenDeleteMessage={setIsOpenDeleteMessage}
+            isOpenUpdateMessage={isOpenUpdateMessage}
+            setIsOpenUpdateMessage={setIsOpenUpdateMessage}
+        />
+    ));
     return (
         <div className="bg-gradient-to-b from-yellow-200 from-5% via-red-300 via-60% to-blue-200 to-90%">
             <Snowfall
@@ -140,40 +154,14 @@ const Layout = () => {
                         
                         columnWidth={300}
                     >
-                        {getSortedMessages().map((element, index) => (
-                            <TagMessage
-                                key={index}
-                                data={element}
-                                isShowBigTag={isShowBigTag}
-                                setIsShowBigTag={setIsShowBigTag}
-                                currentBigTag={currentBigTag}
-                                setcurrentBigTag={setcurrentBigTag}
-                                isOpenDeleteMessage={isOpenDeleteMessage}
-                                setIsOpenDeleteMessage={setIsOpenDeleteMessage}
-                                isOpenUpdateMessage={isOpenUpdateMessage}
-                                setIsOpenUpdateMessage={setIsOpenUpdateMessage}
-                            />
-                        ))}
+                        {sortedMessages}
                     </StackGrid>
                     :
                     <ResponsiveMasonry
                         columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200:4}}
                     >
                         <Masonry gutter="32px">
-                            {getSortedMessages().map((element, index) => (
-                                <TagMessage
-                                    key={index}
-                                    data={element}
-                                    isShowBigTag={isShowBigTag}
-                                    setIsShowBigTag={setIsShowBigTag}
-                                    currentBigTag={currentBigTag}
-                                    setcurrentBigTag={setcurrentBigTag}
-                                    isOpenDeleteMessage={isOpenDeleteMessage}
-                                    setIsOpenDeleteMessage={setIsOpenDeleteMessage}
-                                    isOpenUpdateMessage={isOpenUpdateMessage}
-                                    setIsOpenUpdateMessage={setIsOpenUpdateMessage}
-                                />
-                            ))}
+                            {sortedMessages}
                         </Masonry>
                     </ResponsiveMasonry>
                 }

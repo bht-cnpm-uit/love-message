@@ -142,7 +142,7 @@ const TagMessage = ({
 
                 <LinesEllipsis
                     text={data.message}
-                    className="break-all text-pretty mt-4 mb-14 font-bold"
+                    className="text-wrap break-words mt-4 mb-14 font-bold"
                     maxLine={5}
                     ellipsis="..."
                 />
