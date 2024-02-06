@@ -94,7 +94,9 @@ const TagMessage = ({
                     <div 
                         onMouseEnter={() => setIsShowOptions(true)}
                         onMouseLeave={() => setIsShowOptions(false)}
-                    class="relative inline-block text-left">
+                    class={`${
+                        onHover ? '' : 'hidden'
+                    } relative inline-block text-left`}>
                         <div
                             onClick={(e) => {
                                 e.stopPropagation();
