@@ -1,4 +1,4 @@
-import QR from "../Assets/QRLiXi.jpg"
+import QR from "../Assets/src/IMG_0717.jpeg"
 const QRComponent = ({ setIsOpenQR }) => {
     return (
         <div
