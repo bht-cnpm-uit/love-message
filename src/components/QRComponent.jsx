@@ -1,4 +1,4 @@
-import QR from "../Assets/src/IMG_0717.jpeg"
+import QR from "../Assets/IMG_0717.jpeg"
 const QRComponent = ({ setIsOpenQR }) => {
     return (
         <div
@@ -14,7 +14,7 @@ const QRComponent = ({ setIsOpenQR }) => {
             <img
                 src={QR} // Thay đổi đường dẫn đến hình ảnh QR của bạn
                 alt="Lì xì"
-                style={{ maxWidth: '80%', height: 'auto' }}
+                style={{ maxWidth: '60%', height: 'auto' }}
             />
             <button
                 className="bg-[#B7AE91] hover:bg-[#A7A181] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
